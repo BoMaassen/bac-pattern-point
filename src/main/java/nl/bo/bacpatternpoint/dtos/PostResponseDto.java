@@ -1,31 +1,12 @@
-package nl.bo.bacpatternpoint.models;
-import jakarta.persistence.*;
+package nl.bo.bacpatternpoint.dtos;
 
-import java.util.List;
-
-@Entity
-@Table(name = "Posts")
-public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PostResponseDto {
     private long id;
     private String title;
     private String category;
     private String description;
     private int likes;
     private boolean isDraft;
-
-    public Post(){
-
-    }
-
-    public Post(String title, String category, String description, int likes, boolean isDraft) {
-        this.title = title;
-        this.category = category;
-        this.description = description;
-        this.likes = likes;
-        this.isDraft = isDraft;
-    }
 
     public long getId() {
         return id;
