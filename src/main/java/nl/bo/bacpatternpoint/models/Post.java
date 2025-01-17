@@ -15,6 +15,7 @@ public class Post {
     private int likes;
     private boolean isDraft;
 
+
     public Post(){
 
     }
