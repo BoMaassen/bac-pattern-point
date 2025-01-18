@@ -1,5 +1,7 @@
 package nl.bo.bacpatternpoint.dtos;
 
+import java.util.List;
+
 public class PostCreateDto {
     private String title;
     private String category;

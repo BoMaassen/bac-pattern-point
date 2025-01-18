@@ -15,6 +15,8 @@ public class Post {
     private int likes;
     private boolean isDraft;
 
+    @OneToMany
+    private List<Image> images;
 
     public Post(){
 

@@ -1,23 +1,9 @@
-package nl.bo.bacpatternpoint.models;
+package nl.bo.bacpatternpoint.dtos;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "images")
-public class Image {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ImageResponseDto {
     private Long id;
     private String fileName;
     private String url;
-
-    public Image() {
-    }
-
-    public Image(String fileName, String url) {
-        this.fileName = fileName;
-        this.url = url;
-    }
 
     public Long getId() {
         return id;
