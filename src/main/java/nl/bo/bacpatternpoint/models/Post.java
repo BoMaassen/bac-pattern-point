@@ -15,7 +15,7 @@ public class Post {
     private int likes;
     private boolean isDraft;
 
-    @OneToMany
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Image> images;
 
     public Post(){
@@ -76,5 +76,13 @@ public class Post {
 
     public void setDraft(boolean draft) {
         isDraft = draft;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }

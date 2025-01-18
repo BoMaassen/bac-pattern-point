@@ -18,6 +18,7 @@ public class PostMapper {
         dto.setDescription(post.getDescription());
         dto.setLikes(post.getLikes());
         dto.setDraft(post.isDraft());
+        dto.setImages(ImageMapper.toResponseDtoList(post.getImages()));
         return dto;
     }
 
@@ -27,6 +28,7 @@ public class PostMapper {
         post.setCategory(postCreateDto.getCategory());
         post.setDescription(postCreateDto.getDescription());
         post.setDraft(postCreateDto.isDraft());
+        post.setImages(ImageMapper.createToEntityList(postCreateDto.getImages()));
         return post;
     }
 
@@ -36,6 +38,7 @@ public class PostMapper {
         post.setCategory(postUpdateDto.getCategory());
         post.setDescription(postUpdateDto.getDescription());
         post.setDraft(postUpdateDto.isDraft());
+        post.setImages(ImageMapper.updateToEntityList(postUpdateDto.getImages()));
         return post;
     }
 

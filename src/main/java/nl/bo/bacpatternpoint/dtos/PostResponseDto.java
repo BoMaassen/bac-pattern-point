@@ -1,5 +1,7 @@
 package nl.bo.bacpatternpoint.dtos;
 
+import java.util.List;
+
 public class PostResponseDto {
     private long id;
     private String title;
@@ -7,6 +9,15 @@ public class PostResponseDto {
     private String description;
     private int likes;
     private boolean isDraft;
+    private List<ImageResponseDto> images;
+
+    public List<ImageResponseDto> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageResponseDto> images) {
+        this.images = images;
+    }
 
     public long getId() {
         return id;

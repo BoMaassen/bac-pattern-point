@@ -1,5 +1,9 @@
 package nl.bo.bacpatternpoint.dtos;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 public class PostCreateDto {
@@ -7,6 +11,15 @@ public class PostCreateDto {
     private String category;
     private String description;
     private boolean isDraft;
+    private List<ImageCreateDto> images;
+
+    public List<ImageCreateDto> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageCreateDto> images) {
+        this.images = images;
+    }
 
     public String getTitle() {
         return title;

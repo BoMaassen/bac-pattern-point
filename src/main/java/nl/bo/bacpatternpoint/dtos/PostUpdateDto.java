@@ -1,10 +1,21 @@
 package nl.bo.bacpatternpoint.dtos;
 
+import java.util.List;
+
 public class PostUpdateDto {
     private String title;
     private String category;
     private String description;
     private boolean isDraft;
+    private List<ImageUpdateDto> images;
+
+    public List<ImageUpdateDto> getImages() {
+        return images;
+    }
+
+    public void setImages(List<ImageUpdateDto> images) {
+        this.images = images;
+    }
 
     public String getTitle() {
         return title;

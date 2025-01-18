@@ -11,6 +11,10 @@ public class Image {
     private String fileName;
     private String url;
 
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
+
     public Image() {
     }
 
