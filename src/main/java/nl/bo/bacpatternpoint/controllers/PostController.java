@@ -1,5 +1,6 @@
 package nl.bo.bacpatternpoint.controllers;
 
+import jakarta.validation.Valid;
 import nl.bo.bacpatternpoint.dtos.PostCreateDto;
 import nl.bo.bacpatternpoint.dtos.PostResponseDto;
 import nl.bo.bacpatternpoint.dtos.PostUpdateDto;
@@ -21,7 +22,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostCreateDto postCreateDto){
+    public ResponseEntity<PostResponseDto> createPost(@Valid @RequestBody PostCreateDto postCreateDto){
         PostResponseDto responseDto = postService.createPost(postCreateDto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responseDto.getId()).toUri();
@@ -44,7 +45,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostResponseDto> updatePost(@PathVariable Long id, @RequestBody PostUpdateDto postUpdateDto){
+    public ResponseEntity<PostResponseDto> updatePost(@Valid @PathVariable Long id, @RequestBody PostUpdateDto postUpdateDto){
 
         PostResponseDto postResponseDto = postService.updatePost(id, postUpdateDto);
         return ResponseEntity.ok(postResponseDto);

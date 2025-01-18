@@ -3,6 +3,8 @@ import nl.bo.bacpatternpoint.dtos.ImageCreateDto;
 import nl.bo.bacpatternpoint.dtos.ImageResponseDto;
 import nl.bo.bacpatternpoint.dtos.ImageUpdateDto;
 import nl.bo.bacpatternpoint.models.Image;
+import nl.bo.bacpatternpoint.models.Post;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,8 +36,12 @@ public class ImageMapper {
         return images.stream().map(ImageMapper::toResponseDto).collect(Collectors.toList());
     }
 
-    public static List<Image> createToEntityList(List<ImageCreateDto> imageCreateDtos){
-        return imageCreateDtos.stream().map(ImageMapper::createToEntity).collect(Collectors.toList());
+    public static List<Image> createToEntityList(List<ImageCreateDto> imageCreateDtos, Post post){
+        return imageCreateDtos.stream().map(imageDto -> {
+            Image image = createToEntity(imageDto);
+            image.setPost(post); // Koppel de image aan de post
+            return image;
+        }).collect(Collectors.toList());
     }
 
     public static List<Image> updateToEntityList(List<ImageUpdateDto> imageUpdateDtos){

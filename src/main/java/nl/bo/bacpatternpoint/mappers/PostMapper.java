@@ -3,6 +3,7 @@ package nl.bo.bacpatternpoint.mappers;
 import nl.bo.bacpatternpoint.dtos.PostCreateDto;
 import nl.bo.bacpatternpoint.dtos.PostResponseDto;
 import nl.bo.bacpatternpoint.dtos.PostUpdateDto;
+import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Post;
 
 import java.util.List;
@@ -28,7 +29,8 @@ public class PostMapper {
         post.setCategory(postCreateDto.getCategory());
         post.setDescription(postCreateDto.getDescription());
         post.setDraft(postCreateDto.isDraft());
-        post.setImages(ImageMapper.createToEntityList(postCreateDto.getImages()));
+        List<Image> images = ImageMapper.createToEntityList(postCreateDto.getImages(), post);
+        post.setImages(images);
         return post;
     }
 

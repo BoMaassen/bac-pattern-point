@@ -1,10 +1,20 @@
 package nl.bo.bacpatternpoint.dtos;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 public class PostUpdateDto {
+    @NotNull(message = "Titel is verplicht")
+    @Size(min = 5, max = 50, message = "Titel moet tussen 5 en 50 karakters zijn")
     private String title;
+    @NotNull(message = "Categorie is verplicht")
     private String category;
+    @NotNull(message = "Beschrijving is verplicht")
+    @Size(min = 5, max = 300, message = "Beschrijving moet tussen 5 en 300 karakters zijn")
     private String description;
     private boolean isDraft;
     private List<ImageUpdateDto> images;

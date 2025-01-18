@@ -1,5 +1,8 @@
 package nl.bo.bacpatternpoint.models;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 
 import java.util.List;
 
@@ -8,9 +11,14 @@ import java.util.List;
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    @NotNull(message = "Titel is verplicht")
+    @Size(min = 5, max = 50, message = "Titel moet tussen 5 en 50 karakters zijn")
     private String title;
+    @NotNull(message = "Categorie is verplicht")
     private String category;
+    @NotNull(message = "Beschrijving is verplicht")
+    @Size(min = 5, max = 300, message = "Beschrijving moet tussen 5 en 300 karakters zijn")
     private String description;
     private int likes;
     private boolean isDraft;
