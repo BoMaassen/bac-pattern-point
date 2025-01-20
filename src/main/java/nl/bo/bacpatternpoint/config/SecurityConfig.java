@@ -32,8 +32,8 @@ public class SecurityConfig {
                         .requestMatchers("/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/posts").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.POST, "/posts").hasRole("HAKER")
                         .requestMatchers(HttpMethod.GET, "/posts/{id}").hasAnyRole("HAKER", "PATROONMAKER")
-                        .requestMatchers(HttpMethod.POST, "/posts/{id}").hasRole("HAKER")
                         .requestMatchers(HttpMethod.PUT, "/posts/{id}").hasRole("HAKER")
                         .requestMatchers(HttpMethod.DELETE, "/posts/{id}").hasRole("HAKER")
 
