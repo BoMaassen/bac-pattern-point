@@ -1,27 +1,32 @@
 package nl.bo.bacpatternpoint.controllers;
 
 import jakarta.validation.Valid;
+import nl.bo.bacpatternpoint.dtos.ImageCreateDto;
 import nl.bo.bacpatternpoint.dtos.PostCreateDto;
 import nl.bo.bacpatternpoint.dtos.PostResponseDto;
 import nl.bo.bacpatternpoint.dtos.PostUpdateDto;
+import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.services.PostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
 
+
     public PostController(PostService postService) {
         this.postService = postService;
     }
 
-    @PostMapping
+   @PostMapping
     public ResponseEntity<PostResponseDto> createPost(@Valid @RequestBody PostCreateDto postCreateDto){
         PostResponseDto responseDto = postService.createPost(postCreateDto);
 

@@ -39,7 +39,7 @@ public class ImageMapper {
     public static List<Image> createToEntityList(List<ImageCreateDto> imageCreateDtos, Post post){
         return imageCreateDtos.stream().map(imageDto -> {
             Image image = createToEntity(imageDto);
-            image.setPost(post); // Koppel de image aan de post
+            image.setPost(post);
             return image;
         }).collect(Collectors.toList());
     }
