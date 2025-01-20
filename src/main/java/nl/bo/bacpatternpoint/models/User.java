@@ -19,7 +19,7 @@ public class User {
     @Column(nullable = false)
     private String role;
 
-    // Getters en setters
+
     public Long getId() {
         return id;
     }
