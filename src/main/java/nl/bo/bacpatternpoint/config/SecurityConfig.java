@@ -1,5 +1,7 @@
 package nl.bo.bacpatternpoint.config;
 
+import nl.bo.bacpatternpoint.security.JwtRequestFilter;
+import nl.bo.bacpatternpoint.security.JwtService;
 import nl.bo.bacpatternpoint.services.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
@@ -23,13 +26,14 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtService jwtService) throws Exception {
 
         http
-                .httpBasic(Customizer.withDefaults())
+                .httpBasic(hb -> hb.disable())
                 .authorizeHttpRequests(auth -> auth
                         // Publieke endpoints
                         .requestMatchers("/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/login").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/posts").hasAnyRole("HAKER", "PATROONMAKER")
                         .requestMatchers(HttpMethod.POST, "/posts").hasRole("HAKER")
@@ -39,6 +43,7 @@ public class SecurityConfig {
 
                         .anyRequest().denyAll()
                 )
+                .addFilterBefore(new JwtRequestFilter(jwtService), UsernamePasswordAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> {
                 })
