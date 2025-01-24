@@ -38,7 +38,7 @@ public class LoginController {
             String token = jwtService.generateToken(ud);
 
             return ResponseEntity.ok()
-                    .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                    .header(HttpHeaders.AUTHORIZATION, token)
                     .body("Token generated");
         } catch (AuthenticationException ex) {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
