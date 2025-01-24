@@ -41,4 +41,14 @@ public class UserService {
 
         return UserMapper.toResponseDto(user);
     }
+
+    public boolean deleteUser(Long id){
+        userRepository.deleteById(id);
+
+        return true;
+    }
+
+
+
+
 }
