@@ -2,8 +2,6 @@ package nl.bo.bacpatternpoint.controllers;
 
 import jakarta.validation.Valid;
 import nl.bo.bacpatternpoint.dtos.*;
-import nl.bo.bacpatternpoint.models.User;
-import nl.bo.bacpatternpoint.services.UserDetailsServiceImpl;
 import nl.bo.bacpatternpoint.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,7 +46,7 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id){
-        boolean isDeleted = userService.deletePost(id);
+        boolean isDeleted = userService.deleteUser(id);
 
         return ResponseEntity.noContent().build();
     }

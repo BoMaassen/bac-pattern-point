@@ -34,12 +34,19 @@ public class SecurityConfig {
                         // Publieke endpoints
                         .requestMatchers("/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/users/{id}").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.PUT, "/users/{id}").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasAnyRole("HAKER", "PATROONMAKER")
 
                         .requestMatchers(HttpMethod.GET, "/posts").hasAnyRole("HAKER", "PATROONMAKER")
                         .requestMatchers(HttpMethod.POST, "/posts").hasRole("HAKER")
                         .requestMatchers(HttpMethod.GET, "/posts/{id}").hasAnyRole("HAKER", "PATROONMAKER")
                         .requestMatchers(HttpMethod.PUT, "/posts/{id}").hasRole("HAKER")
                         .requestMatchers(HttpMethod.DELETE, "/posts/{id}").hasRole("HAKER")
+
+
 
                         .anyRequest().denyAll()
                 )

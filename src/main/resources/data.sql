@@ -17,5 +17,5 @@ VALUES
 
 /*wachtwoord voor haker: haker1*/
 /*wachtwoord voor patroonmaker: patroonmaker1*/
-INSERT INTO users (username, password, role) VALUES ('haker', '$2a$10$LrNUPB6w7Zt5RZmxM/mRHO3CcfMaKZ8wXwvVyaUCBUz7zAtlR86Qm', 'HAKER');
-INSERT INTO users (username, password, role) VALUES ('patroonmaker', '$2a$10$269PRnQcWu8I6elFvtaoouGLJCUfMSKEKhIpeh99/igt7.44kLY6S', 'PATROONMAKER');
+INSERT INTO users (username, password, role, email, biography) VALUES ('haker', '$2a$10$LrNUPB6w7Zt5RZmxM/mRHO3CcfMaKZ8wXwvVyaUCBUz7zAtlR86Qm', 'HAKER', 'haker@email.com', 'bio van een haker');
+INSERT INTO users (username, password, role, email, biography) VALUES ('patroonmaker', '$2a$10$269PRnQcWu8I6elFvtaoouGLJCUfMSKEKhIpeh99/igt7.44kLY6S', 'PATROONMAKER', 'patroonmaker@email.com', 'bio van een patroonmaker');

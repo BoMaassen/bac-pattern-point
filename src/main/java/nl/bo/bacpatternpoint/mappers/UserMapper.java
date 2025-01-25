@@ -20,20 +20,20 @@ public class UserMapper {
         return dto;
     }
 
-    public static User toEntity(UserCreateDto userCreateDto){
+    public static User toEntity(UserCreateDto userCreateDto, String encodedPassword){
         User user = new User();
         user.setUsername(userCreateDto.getUsername());
-        user.setPassword(userCreateDto.getPassword());
+        user.setPassword(encodedPassword);
         user.setRole(userCreateDto.getRole());
         user.setEmail(userCreateDto.getEmail());
         user.setBiography(userCreateDto.getBiography());
         return user;
     }
 
-    public static User toEntity(UserUpdateDto userUpdateDto){
+    public static User toEntity(UserUpdateDto userUpdateDto, String encodedPassword){
         User user = new User();
         user.setUsername(userUpdateDto.getUsername());
-        user.setPassword(userUpdateDto.getPassword());
+        user.setPassword(encodedPassword);
         user.setRole(userUpdateDto.getRole());
         user.setEmail(userUpdateDto.getEmail());
         user.setBiography(userUpdateDto.getBiography());

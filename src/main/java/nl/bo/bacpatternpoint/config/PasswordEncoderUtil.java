@@ -8,4 +8,16 @@ public class PasswordEncoderUtil {
         String encodedPassword = encoder.encode(rawPassword);
         System.out.println(encodedPassword);
     }
+
+
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    public static String encodePassword(String rawPassword) {
+        return encoder.encode(rawPassword);
+    }
+
+    public static boolean matches(String rawPassword, String encodedPassword) {
+        return encoder.matches(rawPassword, encodedPassword);
+    }
+
 }
