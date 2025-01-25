@@ -15,7 +15,7 @@ VALUES
     ((SELECT id FROM new_posts WHERE title = 'Handtas'), 'image4.jpg', 'https://i.pinimg.com/736x/27/0e/68/270e68edd4412eb8ff100e4f8ea59855.jpg');
 
 
-/*wachtwoord voor haker: haker1*/
+/*wachtwoord voor haker: haker1iscool*/
 /*wachtwoord voor patroonmaker: patroonmaker1*/
-INSERT INTO users (username, password, role, email, biography) VALUES ('haker', '$2a$10$LrNUPB6w7Zt5RZmxM/mRHO3CcfMaKZ8wXwvVyaUCBUz7zAtlR86Qm', 'HAKER', 'haker@email.com', 'bio van een haker');
+INSERT INTO users (username, password, role, email, biography) VALUES ('haker', '$2a$10$hQ2NaTEuDGAIVlYPmmoBQOvzY6C2QOVhXW4tsWQnM9NXQjZB8p7Ue', 'HAKER', 'haker@email.com', 'bio van een haker');
 INSERT INTO users (username, password, role, email, biography) VALUES ('patroonmaker', '$2a$10$269PRnQcWu8I6elFvtaoouGLJCUfMSKEKhIpeh99/igt7.44kLY6S', 'PATROONMAKER', 'patroonmaker@email.com', 'bio van een patroonmaker');

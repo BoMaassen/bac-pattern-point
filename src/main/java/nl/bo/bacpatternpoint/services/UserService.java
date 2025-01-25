@@ -7,9 +7,7 @@ import nl.bo.bacpatternpoint.dtos.UserUpdateDto;
 import nl.bo.bacpatternpoint.mappers.UserMapper;
 import nl.bo.bacpatternpoint.models.User;
 import nl.bo.bacpatternpoint.repositories.UserRepository;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,6 +30,8 @@ public class UserService {
     public UserResponseDto updateUser(Long id, UserUpdateDto userUpdateDto){
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Geen gebruiker gevonden met id" + id));
 
+        var principal = SecurityContextHolder.getContext().getAuthentication();
+        if (principal.getName().equals(user.getUsername())){
         String encodedPassword = PasswordEncoderUtil.encodePassword(userUpdateDto.getPassword());
 
         User updatedUser = UserMapper.toEntity(userUpdateDto, encodedPassword);
@@ -40,6 +40,8 @@ public class UserService {
         updatedUser = userRepository.save(updatedUser);
 
         return UserMapper.toResponseDto(updatedUser);
+        } else throw new RuntimeException("niet toegestaan om een andere gebruiker te wijzigen");
+
 
     }
 
@@ -50,13 +52,19 @@ public class UserService {
         if (principal.getName().equals(user.getUsername())){
             return UserMapper.toResponseDto(user);
         }
-        else throw new RuntimeException("niet toegestaan ");
+        else throw new RuntimeException("niet toegestaan om een andere gebruiker op te vragen");
     }
 
     public boolean deleteUser(Long id){
-        userRepository.deleteById(id);
+        User user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("Geen gebruiker gevonden met id " + id));
+        var principal = SecurityContextHolder.getContext().getAuthentication();
 
-        return true;
+        if (principal.getName().equals(user.getUsername())){
+            userRepository.deleteById(id);
+
+            return true;
+        }
+       else throw new RuntimeException("niet toegestaan om een andere gebruiker te verwijderen");
     }
 
 
