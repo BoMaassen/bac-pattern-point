@@ -36,6 +36,7 @@ public class LoginController {
 
             var ud = (UserDetails) auth.getPrincipal();
             String token = jwtService.generateToken(ud);
+            System.out.println("token = " + token);
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
