@@ -27,8 +27,8 @@ public class UserService {
         return UserMapper.toResponseDto(newUser);
     }
 
-    public UserResponseDto updateUser(Long id, UserUpdateDto userUpdateDto){
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Geen gebruiker gevonden met id" + id));
+    public UserResponseDto updateUser(String username, UserUpdateDto userUpdateDto){
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Geen gebruiker gevonden met gebruikersnaam " + username));
 
         var principal = SecurityContextHolder.getContext().getAuthentication();
         if (principal.getName().equals(user.getUsername())){
@@ -45,8 +45,8 @@ public class UserService {
 
     }
 
-    public UserResponseDto getUserById(Long id){
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Geen gebruiker gevonden"));
+    public UserResponseDto getUserByUsername(String username){
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Geen gebruiker gevonden"));
         var principal = SecurityContextHolder.getContext().getAuthentication();
 
         if (principal.getName().equals(user.getUsername())){
@@ -55,12 +55,12 @@ public class UserService {
         else throw new RuntimeException("niet toegestaan om een andere gebruiker op te vragen");
     }
 
-    public boolean deleteUser(Long id){
-        User user = userRepository.findById(id).orElseThrow(()-> new RuntimeException("Geen gebruiker gevonden met id " + id));
+    public boolean deleteUser(String username){
+        User user = userRepository.findByUsername(username).orElseThrow(()-> new RuntimeException("Geen gebruiker gevonden met gebruikersnaam " + username));
         var principal = SecurityContextHolder.getContext().getAuthentication();
 
         if (principal.getName().equals(user.getUsername())){
-            userRepository.deleteById(id);
+            userRepository.deleteById(user.getId());
 
             return true;
         }
