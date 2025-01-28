@@ -29,8 +29,6 @@ public class PostMapper {
         post.setCategory(postCreateDto.getCategory());
         post.setDescription(postCreateDto.getDescription());
         post.setDraft(postCreateDto.isDraft());
-        List<Image> images = ImageMapper.createToEntityList(postCreateDto.getImages(), post);
-        post.setImages(images);
         return post;
     }
 
@@ -40,7 +38,6 @@ public class PostMapper {
         post.setCategory(postUpdateDto.getCategory());
         post.setDescription(postUpdateDto.getDescription());
         post.setDraft(postUpdateDto.isDraft());
-        post.setImages(ImageMapper.updateToEntityList(postUpdateDto.getImages()));
         return post;
     }
 

@@ -12,9 +12,12 @@ public class Image {
     private Long id;
     @NotBlank
     private String fileName;
+    private String contentType;
     @NotBlank(message = "URL cannot be blank")
-   /* @Pattern(regexp = "^https?:\\/\\/[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+(:\\d+)?(\\/[^\\s]*)?$", message = "Geen geldig URL format")*/
+    /* @Pattern(regexp = "^https?:\\/\\/[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+(:\\d+)?(\\/[^\\s]*)?$", message = "Geen geldig URL format")*/
     private String url;
+    @Lob
+    private byte[] contents;
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
@@ -22,9 +25,28 @@ public class Image {
     public Image() {
     }
 
-    public Image(String fileName, String url) {
+    public Image(String fileName, String url, String contentType, byte[] contents, Post post) {
         this.fileName = fileName;
         this.url = url;
+        this.contentType = contentType;
+        this.contents = contents;
+        this.post = post;
+    }
+
+    public String getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public byte[] getContents() {
+        return contents;
+    }
+
+    public void setContents(byte[] contents) {
+        this.contents = contents;
     }
 
     public Post getPost() {
