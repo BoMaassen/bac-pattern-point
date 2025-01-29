@@ -1,9 +1,12 @@
 package nl.bo.bacpatternpoint.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import nl.bo.bacpatternpoint.dtos.*;
+import nl.bo.bacpatternpoint.mappers.PostMapper;
 import nl.bo.bacpatternpoint.models.Image;
+import nl.bo.bacpatternpoint.models.Post;
+import nl.bo.bacpatternpoint.repositories.ImageRepository;
+import nl.bo.bacpatternpoint.services.ImageService;
 import nl.bo.bacpatternpoint.services.PostService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.InvalidMediaTypeException;
@@ -15,7 +18,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
-import java.util.Base64;
 import java.util.List;
 import java.util.Objects;
 
@@ -24,23 +26,42 @@ import java.util.Objects;
 @RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
+    private final ImageService imageService;
 
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService, ImageService imageService) {
         this.postService = postService;
+        this.imageService = imageService;
     }
 
-   @PostMapping(consumes = {"multipart/form-data"})
-    public ResponseEntity<PostResponseDto> createPost(@RequestPart("postCreateDto") String postCreateDtoJson,
-                                                      @RequestPart("files") List<MultipartFile> files) throws IOException {
-       ObjectMapper objectMapper = new ObjectMapper();
-       PostCreateDto postCreateDto = objectMapper.readValue(postCreateDtoJson, PostCreateDto.class);
-        PostResponseDto responseDto = postService.createPost(postCreateDto, files);
+
+   @PostMapping
+    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostCreateDto postCreateDto)  {
+
+        PostResponseDto responseDto = postService.createPost(postCreateDto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responseDto.getId()).toUri();
 
         return ResponseEntity.created(location).body(responseDto);
     }
+
+    @PostMapping("/{id}/image")
+    public ResponseEntity<PostResponseDto> addImgToPost(@PathVariable("id") Long postId,
+                                                       @RequestBody MultipartFile file) throws IOException{
+        String url = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/posts/")
+                .path(Objects.requireNonNull(postId.toString()))
+                .path("/image")
+                .toUriString();
+
+        Image image = imageService.storeFile(file, url);
+
+        Post post = postService.addImg(postId, image);
+
+
+        return ResponseEntity.created(URI.create(url)).body(PostMapper.toResponseDto(post));
+    }
+
 
     @GetMapping
     public ResponseEntity<List<PostResponseDto>> getPosts(){
@@ -63,9 +84,10 @@ public class PostController {
         return ResponseEntity
                 .ok()
                 .contentType(mediaType)
-                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + image.getFileName())
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + image.getTitle())
                 .body(image.getContents());
     }
+
 
 
     @GetMapping("/{id}")

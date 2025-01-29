@@ -19,7 +19,7 @@ public class PostMapper {
         dto.setDescription(post.getDescription());
         dto.setLikes(post.getLikes());
         dto.setDraft(post.isDraft());
-        dto.setImages(ImageMapper.toResponseDtoList(post.getImages()));
+        dto.setImage(post.getImage());
         return dto;
     }
 
@@ -41,7 +41,7 @@ public class PostMapper {
         return post;
     }
 
-    public static List<PostResponseDto> toResponseDtoList(List<Post> posts){
+    public static List<PostResponseDto> toResponseDtoList(List<Post> posts) {
         return posts.stream().map(PostMapper::toResponseDto).collect(Collectors.toList());
     }
 

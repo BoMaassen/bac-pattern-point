@@ -34,6 +34,7 @@ public class SecurityConfig {
                         // Publieke endpoints
                         .requestMatchers("/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
+                        .requestMatchers("/**").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
 
