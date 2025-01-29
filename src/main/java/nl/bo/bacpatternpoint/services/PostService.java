@@ -72,11 +72,11 @@ public class PostService {
 
     @Transactional
     public Post addImg(Long postId, Image image) {
-        Optional<Post> optionalStudent = postRepository.findById(postId);
-        if(optionalStudent.isEmpty()){
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if(optionalPost.isEmpty()){
             throw new RecordNotFoundException("Post met id " + postId + " niet gevonden.");
         }
-        Post post = optionalStudent.get();
+        Post post = optionalPost.get();
         post.setImage(image);
         return postRepository.save(post);
     }

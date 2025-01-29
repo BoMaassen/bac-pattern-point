@@ -1,5 +1,6 @@
 package nl.bo.bacpatternpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -32,6 +33,17 @@ public class Pattern {
     private double length;
     @Positive(message = "Breedte moet groter dan 0cm zijn")
     private double width;
+    @OneToOne
+    @JsonIgnoreProperties(value = {"contents", "contentType"})
+    private Image image;
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
 
     public double getWidth() {
         return width;
