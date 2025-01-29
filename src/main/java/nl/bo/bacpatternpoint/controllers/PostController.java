@@ -5,7 +5,6 @@ import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.mappers.PostMapper;
 import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Post;
-import nl.bo.bacpatternpoint.repositories.ImageRepository;
 import nl.bo.bacpatternpoint.services.ImageService;
 import nl.bo.bacpatternpoint.services.PostService;
 import org.springframework.http.HttpHeaders;

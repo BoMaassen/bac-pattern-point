@@ -4,13 +4,10 @@ import jakarta.transaction.Transactional;
 import nl.bo.bacpatternpoint.dtos.PatternCreateDto;
 import nl.bo.bacpatternpoint.dtos.PatternResponseDto;
 import nl.bo.bacpatternpoint.dtos.PatternUpdateDto;
-import nl.bo.bacpatternpoint.dtos.PostResponseDto;
 import nl.bo.bacpatternpoint.exception.RecordNotFoundException;
 import nl.bo.bacpatternpoint.mappers.PatternMapper;
-import nl.bo.bacpatternpoint.mappers.PostMapper;
 import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Pattern;
-import nl.bo.bacpatternpoint.models.Post;
 import nl.bo.bacpatternpoint.repositories.PatternRepository;
 import org.springframework.stereotype.Service;
 
