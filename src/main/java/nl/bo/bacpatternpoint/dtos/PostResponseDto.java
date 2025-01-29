@@ -1,6 +1,7 @@
 package nl.bo.bacpatternpoint.dtos;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import nl.bo.bacpatternpoint.models.Image;
 
 public class PostResponseDto {
     private long id;
@@ -9,14 +10,15 @@ public class PostResponseDto {
     private String description;
     private int likes;
     private boolean isDraft;
-    private List<ImageResponseDto> images;
+    @JsonIgnoreProperties(value = {"contents","contentType"} )
+    private Image image;
 
-    public List<ImageResponseDto> getImages() {
-        return images;
+    public Image getImage() {
+        return image;
     }
 
-    public void setImages(List<ImageResponseDto> images) {
-        this.images = images;
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     public long getId() {

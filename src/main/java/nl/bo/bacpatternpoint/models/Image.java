@@ -2,7 +2,6 @@ package nl.bo.bacpatternpoint.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "images")
@@ -11,28 +10,37 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    private String fileName;
+    private String title;
+    private String contentType;
     @NotBlank(message = "URL cannot be blank")
-   /* @Pattern(regexp = "^https?:\\/\\/[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+(:\\d+)?(\\/[^\\s]*)?$", message = "Geen geldig URL format")*/
     private String url;
-    @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id")
-    private Post post;
+    @Lob
+    private byte[] contents;
 
     public Image() {
     }
 
-    public Image(String fileName, String url) {
-        this.fileName = fileName;
+    public Image(String title, String url, String contentType, byte[] contents) {
+        this.title = title;
         this.url = url;
+        this.contentType = contentType;
+        this.contents = contents;
     }
 
-    public Post getPost() {
-        return post;
+    public String getContentType() {
+        return contentType;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setContentType(String contentType) {
+        this.contentType = contentType;
+    }
+
+    public byte[] getContents() {
+        return contents;
+    }
+
+    public void setContents(byte[] contents) {
+        this.contents = contents;
     }
 
     public Long getId() {
@@ -43,12 +51,12 @@ public class Image {
         this.id = id;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setTitle(String fileName) {
+        this.title = fileName;
     }
 
     public String getUrl() {

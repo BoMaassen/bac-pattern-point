@@ -1,14 +1,15 @@
 package nl.bo.bacpatternpoint.services;
 
-import nl.bo.bacpatternpoint.dtos.PostCreateDto;
-import nl.bo.bacpatternpoint.dtos.PostResponseDto;
-import nl.bo.bacpatternpoint.dtos.PostUpdateDto;
+import jakarta.transaction.Transactional;
+import nl.bo.bacpatternpoint.dtos.*;
+import nl.bo.bacpatternpoint.exception.RecordNotFoundException;
 import nl.bo.bacpatternpoint.mappers.PostMapper;
+import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Post;
 import nl.bo.bacpatternpoint.repositories.PostRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostService {
@@ -20,10 +21,11 @@ public class PostService {
     }
 
     public PostResponseDto createPost(PostCreateDto postCreateDto){
-        Post savedPost = postRepository.save(PostMapper.toEntity(postCreateDto));
-
+        Post post = PostMapper.toEntity(postCreateDto);
+        Post savedPost = postRepository.save(post);
         return PostMapper.toResponseDto(savedPost);
     }
+
 
     public PostResponseDto updatePost(Long id, PostUpdateDto postUpdateDto){
         Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Geen post gevonden met id " + id));
@@ -55,6 +57,30 @@ public class PostService {
 
         return true;
     }
+
+    @Transactional
+    public Image getPostImg(Long postId) {
+
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if(optionalPost.isEmpty()){
+            throw new RecordNotFoundException("Post met nummer " + postId + " niet gevonden.");
+        }
+
+
+        return optionalPost.get().getImage();
+    }
+
+    @Transactional
+    public Post addImg(Long postId, Image image) {
+        Optional<Post> optionalStudent = postRepository.findById(postId);
+        if(optionalStudent.isEmpty()){
+            throw new RecordNotFoundException("Post met id " + postId + " niet gevonden.");
+        }
+        Post post = optionalStudent.get();
+        post.setImage(image);
+        return postRepository.save(post);
+    }
+
 
 
 

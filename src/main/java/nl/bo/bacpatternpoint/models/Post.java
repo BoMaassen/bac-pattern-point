@@ -1,4 +1,6 @@
 package nl.bo.bacpatternpoint.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -22,11 +24,11 @@ public class Post {
     private String description;
     private int likes;
     private boolean isDraft;
+    @OneToOne
+    @JsonIgnoreProperties(value = {"contents", "contentType"})
+    private Image image;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Image> images;
-
-    public Post(){
+    public Post() {
 
     }
 
@@ -38,8 +40,20 @@ public class Post {
         this.isDraft = isDraft;
     }
 
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
+    }
+
     public long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setId(long id) {
@@ -86,11 +100,4 @@ public class Post {
         isDraft = draft;
     }
 
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
-    }
 }
