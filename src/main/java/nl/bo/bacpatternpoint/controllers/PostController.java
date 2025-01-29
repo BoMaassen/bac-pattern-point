@@ -36,7 +36,7 @@ public class PostController {
 
 
    @PostMapping
-    public ResponseEntity<PostResponseDto> createPost(@RequestBody PostCreateDto postCreateDto)  {
+    public ResponseEntity<PostResponseDto> createPost(@Valid @RequestBody PostCreateDto postCreateDto)  {
 
         PostResponseDto responseDto = postService.createPost(postCreateDto);
 
@@ -46,7 +46,7 @@ public class PostController {
     }
 
     @PostMapping("/{id}/image")
-    public ResponseEntity<PostResponseDto> addImgToPost(@PathVariable("id") Long postId,
+    public ResponseEntity<PostResponseDto> addImgToPost(@Valid @PathVariable("id") Long postId,
                                                        @RequestBody MultipartFile file) throws IOException{
         String url = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/posts/")
