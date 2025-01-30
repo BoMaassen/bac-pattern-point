@@ -10,6 +10,17 @@ public class Abbreviation {
     private Long id;
     private String abbreviated;
     private String full;
+    @ManyToOne
+    @JoinColumn(name = "pattern_id", referencedColumnName = "id")
+    private Pattern pattern;
+
+    public Pattern getPattern() {
+        return pattern;
+    }
+
+    public void setPattern(Pattern pattern) {
+        this.pattern = pattern;
+    }
 
     public String getFull() {
         return full;

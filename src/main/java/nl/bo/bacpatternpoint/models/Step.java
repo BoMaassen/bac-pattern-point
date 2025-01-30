@@ -17,6 +17,18 @@ public class Step {
     @Size(min = 5, max = 300, message = "Beschrijving moet tussen 5 en 300 karakters zijn")
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "pattern_id", referencedColumnName = "id")
+    private Pattern pattern;
+
+    public Pattern getPattern() {
+        return pattern;
+    }
+
+    public void setPattern(Pattern pattern) {
+        this.pattern = pattern;
+    }
+
     public String getDescription() {
         return description;
     }

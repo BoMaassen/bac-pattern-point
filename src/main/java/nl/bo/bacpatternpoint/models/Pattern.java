@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Patterns")
 public class Pattern {
@@ -36,6 +38,27 @@ public class Pattern {
     @OneToOne
     @JsonIgnoreProperties(value = {"contents", "contentType"})
     private Image image;
+
+    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
+    private List<Step> steps;
+    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
+    private List<Abbreviation> abbreviations;
+
+    public List<Abbreviation> getAbbreviations() {
+        return abbreviations;
+    }
+
+    public void setAbbreviations(List<Abbreviation> abbreviations) {
+        this.abbreviations = abbreviations;
+    }
+
+    public List<Step> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<Step> steps) {
+        this.steps = steps;
+    }
 
     public Image getImage() {
         return image;

@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 public class PatternCreateDto {
     @NotNull(message = "Titel is verplicht")
     @Size(min = 5, max = 50, message = "Titel moet tussen 5 en 50 karakters zijn")
@@ -26,6 +28,24 @@ public class PatternCreateDto {
     private double length;
     @Positive(message = "Breedte moet groter dan 0cm zijn")
     private double width;
+    private List<StepCreateDto> steps;
+    private List<AbbreviationCreateDto> abbreviations;
+
+    public List<StepCreateDto> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<StepCreateDto> steps) {
+        this.steps = steps;
+    }
+
+    public List<AbbreviationCreateDto> getAbbreviations() {
+        return abbreviations;
+    }
+
+    public void setAbbreviations(List<AbbreviationCreateDto> abbreviations) {
+        this.abbreviations = abbreviations;
+    }
 
     public double getWidth() {
         return width;

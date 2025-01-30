@@ -10,14 +10,13 @@ public class PostResponseDto {
     private String description;
     private int likes;
     private boolean isDraft;
-    @JsonIgnoreProperties(value = {"contents","contentType"} )
-    private Image image;
+    private ImageResponseDto image;
 
-    public Image getImage() {
+    public ImageResponseDto getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(ImageResponseDto image) {
         this.image = image;
     }
 

@@ -19,7 +19,7 @@ public class PostMapper {
         dto.setDescription(post.getDescription());
         dto.setLikes(post.getLikes());
         dto.setDraft(post.isDraft());
-        dto.setImage(post.getImage());
+        dto.setImage(ImageMapper.toResponseDto(post.getImage()));
         return dto;
     }
 

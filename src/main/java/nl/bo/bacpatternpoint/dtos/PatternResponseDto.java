@@ -1,5 +1,7 @@
 package nl.bo.bacpatternpoint.dtos;
 
+import java.util.List;
+
 public class PatternResponseDto {
     private Long id;
     private String title;
@@ -13,6 +15,33 @@ public class PatternResponseDto {
     private boolean measuringTape;
     private double length;
     private double width;
+    private ImageResponseDto image;
+    private List<StepResponseDto> steps;
+    private List<AbbreviationResponseDto> abbreviations;
+
+    public ImageResponseDto getImage() {
+        return image;
+    }
+
+    public void setImage(ImageResponseDto image) {
+        this.image = image;
+    }
+
+    public List<AbbreviationResponseDto> getAbbreviations() {
+        return abbreviations;
+    }
+
+    public void setAbbreviations(List<AbbreviationResponseDto> abbreviations) {
+        this.abbreviations = abbreviations;
+    }
+
+    public List<StepResponseDto> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<StepResponseDto> steps) {
+        this.steps = steps;
+    }
 
     public Long getId() {
         return id;
