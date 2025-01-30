@@ -1,13 +1,6 @@
-package nl.bo.bacpatternpoint.models;
+package nl.bo.bacpatternpoint.dtos;
 
-import jakarta.persistence.*;
-
-@Entity
-@Table(name = "Abbreviations")
-public class Abbreviation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class AbbreviationCreateDto {
     private String abbreviated;
     private String full;
 
@@ -27,11 +20,4 @@ public class Abbreviation {
         this.abbreviated = abbreviated;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

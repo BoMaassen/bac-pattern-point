@@ -1,15 +1,9 @@
-package nl.bo.bacpatternpoint.models;
+package nl.bo.bacpatternpoint.dtos;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "Steps")
-public class Step {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class StepUpdateDto {
     @NotNull(message = "Titel is verplicht")
     @Size(min = 5, max = 50, message = "Titel moet tussen 5 en 50 karakters zijn")
     private String title;
@@ -31,13 +25,5 @@ public class Step {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }
