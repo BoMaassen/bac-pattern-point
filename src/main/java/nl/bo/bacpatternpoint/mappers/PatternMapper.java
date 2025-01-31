@@ -1,10 +1,7 @@
 package nl.bo.bacpatternpoint.mappers;
 
-import nl.bo.bacpatternpoint.dtos.PatternCreateDto;
-import nl.bo.bacpatternpoint.dtos.PatternResponseDto;
-import nl.bo.bacpatternpoint.dtos.PatternUpdateDto;
+import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.models.Pattern;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,6 +20,9 @@ public class PatternMapper {
         dto.setMeasuringTape(pattern.isMeasuringTape());
         dto.setLength(pattern.getLength());
         dto.setWidth(pattern.getWidth());
+        dto.setImage(pattern.getImage());
+        dto.setAbbreviations(AbbreviationMapper.toResponseDtoList(pattern.getAbbreviations()));
+        dto.setSteps(StepMapper.toResponseDtoList(pattern.getSteps()));
         return dto;
     }
 
@@ -55,6 +55,7 @@ public class PatternMapper {
         pattern.setMeasuringTape(patternUpdateDto.isMeasuringTape());
         pattern.setLength(patternUpdateDto.getLength());
         pattern.setWidth(patternUpdateDto.getWidth());
+
         return pattern;
     }
 

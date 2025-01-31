@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/pattern")
+@RequestMapping("/patterns")
 public class PatternController {
 
     private final PatternService patternService;
@@ -46,7 +46,7 @@ public class PatternController {
     public ResponseEntity<PatternResponseDto> addImgToPattern(@Valid @PathVariable("id") Long patternId,
                                                         @RequestBody MultipartFile file) throws IOException {
         String url = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/pattern/")
+                .path("/patterns/")
                 .path(Objects.requireNonNull(patternId.toString()))
                 .path("/image")
                 .toUriString();

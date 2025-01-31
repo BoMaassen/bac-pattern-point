@@ -14,26 +14,34 @@ public class AbbreviationMapper {
         AbbreviationResponseDto dto = new AbbreviationResponseDto();
         dto.setId(abbreviation.getId());
         dto.setAbbreviated(abbreviation.getAbbreviated());
-        dto.setFull(abbreviation.getFull());
+        dto.setFullForm(abbreviation.getFullForm());
         return dto;
     }
 
     public static Abbreviation toEntity(AbbreviationCreateDto abbreviationCreateDto){
         Abbreviation abbreviation = new Abbreviation();
         abbreviation.setAbbreviated(abbreviationCreateDto.getAbbreviated());
-        abbreviation.setFull(abbreviationCreateDto.getFull());
+        abbreviation.setFullForm(abbreviationCreateDto.getFullForm());
         return abbreviation;
     }
 
-    public static Abbreviation toEntity(AbbreviationUpdateDto abbreviationUpdateDto){
+    public static Abbreviation toEntity(AbbreviationUpdateDto abbreviationUpdateDto) {
         Abbreviation abbreviation = new Abbreviation();
         abbreviation.setAbbreviated(abbreviationUpdateDto.getAbbreviated());
-        abbreviation.setFull(abbreviationUpdateDto.getFull());
+        abbreviation.setFullForm(abbreviationUpdateDto.getFullForm());
         return abbreviation;
     }
 
     public static List<AbbreviationResponseDto> toResponseDtoList(List<Abbreviation> abbreviations){
         return abbreviations.stream().map(AbbreviationMapper::toResponseDto).collect(Collectors.toList());
+    }
+
+    public static List<Abbreviation> toEntityListCreate(List<AbbreviationCreateDto> abbreviationCreateDtos){
+        return abbreviationCreateDtos.stream().map(AbbreviationMapper::toEntity).collect(Collectors.toList());
+    }
+
+    public static List<Abbreviation> toEntityListUpdate(List<AbbreviationUpdateDto> abbreviationUpdateDtos){
+        return abbreviationUpdateDtos.stream().map(AbbreviationMapper::toEntity).collect(Collectors.toList());
     }
 
 

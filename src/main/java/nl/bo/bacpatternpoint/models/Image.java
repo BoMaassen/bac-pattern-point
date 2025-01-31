@@ -16,6 +16,12 @@ public class Image {
     private String url;
     @Lob
     private byte[] contents;
+    /*@OneToOne
+    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    private Post post;*/
+    /*@OneToOne*/
+   /* @JoinColumn(name = "pattern_id", referencedColumnName = "id")
+    private Pattern pattern;*/
 
     public Image() {
     }
@@ -26,6 +32,22 @@ public class Image {
         this.contentType = contentType;
         this.contents = contents;
     }
+
+    /*public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }*/
+
+ /*   public Pattern getPattern() {
+        return pattern;
+    }
+
+    public void setPattern(Pattern pattern) {
+        this.pattern = pattern;
+    }*/
 
     public String getContentType() {
         return contentType;

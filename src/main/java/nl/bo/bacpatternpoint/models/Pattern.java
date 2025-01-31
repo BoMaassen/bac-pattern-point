@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table(name = "Patterns")
+@Table(name = "patterns")
 public class Pattern {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,9 +39,9 @@ public class Pattern {
     @JsonIgnoreProperties(value = {"contents", "contentType"})
     private Image image;
 
-    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Step> steps;
-    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Abbreviation> abbreviations;
 
     public List<Abbreviation> getAbbreviations() {

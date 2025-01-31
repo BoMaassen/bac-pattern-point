@@ -4,6 +4,8 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import nl.bo.bacpatternpoint.models.Abbreviation;
+import nl.bo.bacpatternpoint.models.Step;
 
 import java.util.List;
 
@@ -28,24 +30,7 @@ public class PatternUpdateDto {
     private double length;
     @Positive(message = "Breedte moet groter dan 0cm zijn")
     private double width;
-    private List<StepUpdateDto> steps;
-    private List<AbbreviationUpdateDto> abbreviations;
 
-    public List<AbbreviationUpdateDto> getAbbreviations() {
-        return abbreviations;
-    }
-
-    public void setAbbreviations(List<AbbreviationUpdateDto> abbreviations) {
-        this.abbreviations = abbreviations;
-    }
-
-    public List<StepUpdateDto> getSteps() {
-        return steps;
-    }
-
-    public void setSteps(List<StepUpdateDto> steps) {
-        this.steps = steps;
-    }
 
     public double getWidth() {
         return width;

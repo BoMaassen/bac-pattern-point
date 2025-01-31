@@ -3,14 +3,14 @@ package nl.bo.bacpatternpoint.dtos;
 public class AbbreviationResponseDto {
     private Long id;
     private String abbreviated;
-    private String full;
+    private String fullForm;
 
-    public String getFull() {
-        return full;
+    public String getFullForm() {
+        return fullForm;
     }
 
-    public void setFull(String full) {
-        this.full = full;
+    public void setFullForm(String fullForm) {
+        this.fullForm = fullForm;
     }
 
     public String getAbbreviated() {

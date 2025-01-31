@@ -1,13 +1,15 @@
 package nl.bo.bacpatternpoint.services;
 
 import jakarta.transaction.Transactional;
-import nl.bo.bacpatternpoint.dtos.PatternCreateDto;
-import nl.bo.bacpatternpoint.dtos.PatternResponseDto;
-import nl.bo.bacpatternpoint.dtos.PatternUpdateDto;
+import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.exception.RecordNotFoundException;
+import nl.bo.bacpatternpoint.mappers.AbbreviationMapper;
 import nl.bo.bacpatternpoint.mappers.PatternMapper;
+import nl.bo.bacpatternpoint.mappers.StepMapper;
+import nl.bo.bacpatternpoint.models.Abbreviation;
 import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Pattern;
+import nl.bo.bacpatternpoint.models.Step;
 import nl.bo.bacpatternpoint.repositories.PatternRepository;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,7 @@ public class PatternService {
         Pattern updatedPattern = PatternMapper.toEntity(patternUpdateDto);
 
         updatedPattern.setId(pattern.getId());
+
         Pattern savedPattern = patternRepository.save(updatedPattern);
 
         return PatternMapper.toResponseDto(savedPattern);

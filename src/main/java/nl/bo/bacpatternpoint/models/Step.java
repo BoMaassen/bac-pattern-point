@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "Steps")
+@Table(name = "steps")
 public class Step {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Step {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "pattern_id", referencedColumnName = "id")
+    @JoinColumn(name = "pattern_id", referencedColumnName = "id", nullable = false)
     private Pattern pattern;
 
     public Pattern getPattern() {

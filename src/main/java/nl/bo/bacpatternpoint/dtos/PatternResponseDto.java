@@ -1,5 +1,10 @@
 package nl.bo.bacpatternpoint.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import nl.bo.bacpatternpoint.models.Abbreviation;
+import nl.bo.bacpatternpoint.models.Image;
+import nl.bo.bacpatternpoint.models.Step;
+
 import java.util.List;
 
 public class PatternResponseDto {
@@ -15,15 +20,17 @@ public class PatternResponseDto {
     private boolean measuringTape;
     private double length;
     private double width;
-    private ImageResponseDto image;
+    @JsonIgnoreProperties(value = {"contents", "contentType"})
+    private Image image;
     private List<StepResponseDto> steps;
     private List<AbbreviationResponseDto> abbreviations;
 
-    public ImageResponseDto getImage() {
+
+    public Image getImage() {
         return image;
     }
 
-    public void setImage(ImageResponseDto image) {
+    public void setImage(Image image) {
         this.image = image;
     }
 

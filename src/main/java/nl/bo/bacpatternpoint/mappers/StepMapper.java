@@ -1,7 +1,6 @@
 package nl.bo.bacpatternpoint.mappers;
 
 import nl.bo.bacpatternpoint.dtos.*;
-import nl.bo.bacpatternpoint.models.Abbreviation;
 import nl.bo.bacpatternpoint.models.Step;
 
 import java.util.List;
@@ -23,14 +22,22 @@ public class StepMapper {
         return step;
     }
 
-    public static Abbreviation toEntity(AbbreviationUpdateDto abbreviationUpdateDto){
-        Abbreviation abbreviation = new Abbreviation();
-        abbreviation.setAbbreviated(abbreviationUpdateDto.getAbbreviated());
-        abbreviation.setFull(abbreviationUpdateDto.getFull());
-        return abbreviation;
+    public static Step toEntity(StepUpdateDto stepUpdateDto){
+        Step step = new Step();
+        step.setTitle(stepUpdateDto.getTitle());
+        step.setDescription(stepUpdateDto.getDescription());
+        return step;
     }
 
-    public static List<AbbreviationResponseDto> toResponseDtoList(List<Abbreviation> abbreviations){
-        return abbreviations.stream().map(AbbreviationMapper::toResponseDto).collect(Collectors.toList());
+    public static List<StepResponseDto> toResponseDtoList(List<Step> steps){
+        return steps.stream().map(StepMapper::toResponseDto).collect(Collectors.toList());
+    }
+
+    public static List<Step> toEntityListCreate(List<StepCreateDto> stepCreateDtos){
+        return stepCreateDtos.stream().map(StepMapper::toEntity).collect(Collectors.toList());
+    }
+
+    public static List<Step> toEntityListUpdate(List<StepUpdateDto> stepUpdateDtos){
+        return stepUpdateDtos.stream().map(StepMapper::toEntity).collect(Collectors.toList());
     }
 }

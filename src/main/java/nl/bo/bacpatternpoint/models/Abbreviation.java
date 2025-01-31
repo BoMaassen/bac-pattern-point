@@ -3,16 +3,24 @@ package nl.bo.bacpatternpoint.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Abbreviations")
+@Table(name = "abbreviations")
 public class Abbreviation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String abbreviated;
-    private String full;
+    private String fullForm;
     @ManyToOne
     @JoinColumn(name = "pattern_id", referencedColumnName = "id")
     private Pattern pattern;
+
+    public String getFullForm() {
+        return fullForm;
+    }
+
+    public void setFullForm(String fullForm) {
+        this.fullForm = fullForm;
+    }
 
     public Pattern getPattern() {
         return pattern;
@@ -22,13 +30,6 @@ public class Abbreviation {
         this.pattern = pattern;
     }
 
-    public String getFull() {
-        return full;
-    }
-
-    public void setFull(String full) {
-        this.full = full;
-    }
 
     public String getAbbreviated() {
         return abbreviated;

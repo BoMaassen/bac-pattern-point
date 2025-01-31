@@ -17,15 +17,7 @@ public class PostUpdateDto {
     @Size(min = 5, max = 300, message = "Beschrijving moet tussen 5 en 300 karakters zijn")
     private String description;
     private boolean isDraft;
-    private List<ImageUpdateDto> images;
 
-    public List<ImageUpdateDto> getImages() {
-        return images;
-    }
-
-    public void setImages(List<ImageUpdateDto> images) {
-        this.images = images;
-    }
 
     public String getTitle() {
         return title;

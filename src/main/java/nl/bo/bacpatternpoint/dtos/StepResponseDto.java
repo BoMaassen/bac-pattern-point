@@ -2,6 +2,7 @@ package nl.bo.bacpatternpoint.dtos;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import nl.bo.bacpatternpoint.models.Pattern;
 
 public class StepResponseDto {
     private Long id;
