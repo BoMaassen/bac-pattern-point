@@ -26,18 +26,15 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> signIn(@RequestBody UserLoginRequestDTO userLoginRequestDTO
-    ) {
+    public ResponseEntity<String> signIn(@RequestBody UserLoginRequestDTO userLoginRequestDTO) {
         UsernamePasswordAuthenticationToken up =
                 new UsernamePasswordAuthenticationToken(userLoginRequestDTO.getUserName(), userLoginRequestDTO.getPassword());
 
         try {
             Authentication auth = authManager.authenticate(up);
-
             var ud = (UserDetails) auth.getPrincipal();
             String token = jwtService.generateToken(ud);
             System.out.println("token = " + token);
-
             return ResponseEntity.ok()
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                     .body("Token generated");

@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
-
 import java.util.List;
 
 @Entity
@@ -38,7 +37,6 @@ public class Pattern {
     @OneToOne
     @JsonIgnoreProperties(value = {"contents", "contentType"})
     private Image image;
-
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Step> steps;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -163,7 +161,6 @@ public class Pattern {
     public void setId(Long id) {
         this.id = id;
     }
-
 }
 
 

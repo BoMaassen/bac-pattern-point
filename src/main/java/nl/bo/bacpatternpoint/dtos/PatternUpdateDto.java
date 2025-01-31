@@ -4,10 +4,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
-import nl.bo.bacpatternpoint.models.Abbreviation;
-import nl.bo.bacpatternpoint.models.Step;
-
-import java.util.List;
 
 public class PatternUpdateDto {
     @NotNull(message = "Titel is verplicht")
@@ -30,7 +26,6 @@ public class PatternUpdateDto {
     private double length;
     @Positive(message = "Breedte moet groter dan 0cm zijn")
     private double width;
-
 
     public double getWidth() {
         return width;
@@ -119,5 +114,4 @@ public class PatternUpdateDto {
     public void setTitle(String title) {
         this.title = title;
     }
-
 }

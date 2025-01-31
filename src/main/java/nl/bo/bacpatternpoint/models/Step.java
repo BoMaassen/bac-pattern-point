@@ -16,7 +16,6 @@ public class Step {
     @NotNull(message = "Beschrijving is verplicht")
     @Size(min = 5, max = 300, message = "Beschrijving moet tussen 5 en 300 karakters zijn")
     private String description;
-
     @ManyToOne
     @JoinColumn(name = "pattern_id", referencedColumnName = "id", nullable = false)
     private Pattern pattern;

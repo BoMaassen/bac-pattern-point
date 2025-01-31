@@ -20,37 +20,27 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserCreateDto userCreateDto){
+    public ResponseEntity<UserResponseDto> createUser(@Valid @RequestBody UserCreateDto userCreateDto) {
         UserResponseDto userResponseDto = userService.createUser(userCreateDto);
-
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{username}").buildAndExpand(userResponseDto.getUsername()).toUri();
-
         return ResponseEntity.created(location).body(userResponseDto);
     }
 
     @GetMapping("/{username}")
-    public ResponseEntity<UserResponseDto> getUserByUsername(@PathVariable String username){
+    public ResponseEntity<UserResponseDto> getUserByUsername(@PathVariable String username) {
         UserResponseDto userResponseDto = userService.getUserByUsername(username);
-
         return ResponseEntity.ok(userResponseDto);
-
     }
 
     @PutMapping("/{username}")
-    public ResponseEntity<UserResponseDto> updateUser(@Valid @PathVariable String username, @RequestBody UserUpdateDto userUpdateDto){
-
+    public ResponseEntity<UserResponseDto> updateUser(@Valid @PathVariable String username, @RequestBody UserUpdateDto userUpdateDto) {
         UserResponseDto userResponseDto = userService.updateUser(username, userUpdateDto);
         return ResponseEntity.ok(userResponseDto);
-
     }
 
     @DeleteMapping("/{username}")
-    public ResponseEntity<Void> deleteUser(@PathVariable String username){
+    public ResponseEntity<Void> deleteUser(@PathVariable String username) {
         boolean isDeleted = userService.deleteUser(username);
-
         return ResponseEntity.noContent().build();
     }
-
-
-
 }

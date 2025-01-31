@@ -7,10 +7,7 @@ import nl.bo.bacpatternpoint.models.Pattern;
 import nl.bo.bacpatternpoint.repositories.AbbreviationRepository;
 import nl.bo.bacpatternpoint.repositories.PatternRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AbbreviationService {

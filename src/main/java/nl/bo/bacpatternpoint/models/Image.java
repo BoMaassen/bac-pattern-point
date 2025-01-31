@@ -27,22 +27,6 @@ public class Image {
         this.contents = contents;
     }
 
-    /*public Post getPost() {
-        return post;
-    }
-
-    public void setPost(Post post) {
-        this.post = post;
-    }*/
-
- /*   public Pattern getPattern() {
-        return pattern;
-    }
-
-    public void setPattern(Pattern pattern) {
-        this.pattern = pattern;
-    }*/
-
     public String getContentType() {
         return contentType;
     }

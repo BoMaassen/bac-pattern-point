@@ -1,7 +1,5 @@
 package nl.bo.bacpatternpoint.dtos;
 
-import nl.bo.bacpatternpoint.models.Pattern;
-
 public class AbbreviationCreateDto {
     private String abbreviated;
     private String fullForm;
@@ -21,5 +19,4 @@ public class AbbreviationCreateDto {
     public void setAbbreviated(String abbreviated) {
         this.abbreviated = abbreviated;
     }
-
 }

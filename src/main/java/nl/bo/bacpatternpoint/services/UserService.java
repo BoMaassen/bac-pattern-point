@@ -20,7 +20,6 @@ public class UserService {
     }
 
     public UserResponseDto createUser(UserCreateDto userCreateDto){
-
         String encodedPassword = PasswordEncoderUtil.encodePassword(userCreateDto.getPassword());
 
         User newUser = userRepository.save(UserMapper.toEntity(userCreateDto, encodedPassword));
@@ -66,8 +65,4 @@ public class UserService {
         }
        else throw new RuntimeException("niet toegestaan om een andere gebruiker te verwijderen");
     }
-
-
-
-
 }

@@ -2,7 +2,6 @@ package nl.bo.bacpatternpoint.mappers;
 
 import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.models.Step;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

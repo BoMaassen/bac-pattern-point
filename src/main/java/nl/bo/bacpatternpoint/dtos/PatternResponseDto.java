@@ -1,10 +1,5 @@
 package nl.bo.bacpatternpoint.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import nl.bo.bacpatternpoint.models.Abbreviation;
-import nl.bo.bacpatternpoint.models.Image;
-import nl.bo.bacpatternpoint.models.Step;
-
 import java.util.List;
 
 public class PatternResponseDto {

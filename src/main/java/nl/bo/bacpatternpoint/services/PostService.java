@@ -26,7 +26,6 @@ public class PostService {
         return PostMapper.toResponseDto(savedPost);
     }
 
-
     public PostResponseDto updatePost(Long id, PostUpdateDto postUpdateDto){
         Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Geen post gevonden met id " + id));
 
@@ -65,8 +64,6 @@ public class PostService {
         if(optionalPost.isEmpty()){
             throw new RecordNotFoundException("Post met nummer " + postId + " niet gevonden.");
         }
-
-
         return optionalPost.get().getImage();
     }
 
@@ -80,10 +77,4 @@ public class PostService {
         post.setImage(image);
         return postRepository.save(post);
     }
-
-
-
-
-
-
 }

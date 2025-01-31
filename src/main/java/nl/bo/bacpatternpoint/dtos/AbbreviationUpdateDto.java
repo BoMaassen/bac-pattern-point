@@ -1,7 +1,5 @@
 package nl.bo.bacpatternpoint.dtos;
 
-import nl.bo.bacpatternpoint.models.Pattern;
-
 public class AbbreviationUpdateDto {
     private String abbreviated;
     private String fullForm;

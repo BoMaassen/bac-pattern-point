@@ -7,12 +7,10 @@ import nl.bo.bacpatternpoint.models.Step;
 import nl.bo.bacpatternpoint.repositories.PatternRepository;
 import nl.bo.bacpatternpoint.repositories.StepRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
 public class StepService {
-
     private final StepRepository stepRepository;
     private final PatternRepository patternRepository;
 

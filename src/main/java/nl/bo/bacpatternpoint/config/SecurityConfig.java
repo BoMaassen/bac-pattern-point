@@ -30,7 +30,7 @@ public class SecurityConfig {
         http
                 .httpBasic(hb -> hb.disable())
                 .authorizeHttpRequests(auth -> auth
-                        // Publieke endpoints
+
                         .requestMatchers("/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
                         .requestMatchers("/**").permitAll()
@@ -41,14 +41,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/users/{id}").hasAnyRole("HAKER", "PATROONMAKER")
                         .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasAnyRole("HAKER", "PATROONMAKER")
 
-
                         .requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/posts").hasRole("HAKER")
                         .requestMatchers(HttpMethod.GET, "/posts/{id}").hasAnyRole("HAKER", "PATROONMAKER")
                         .requestMatchers(HttpMethod.PUT, "/posts/{id}").hasRole("HAKER")
                         .requestMatchers(HttpMethod.DELETE, "/posts/{id}").hasRole("HAKER")
-
-
 
                         .anyRequest().denyAll()
                 )

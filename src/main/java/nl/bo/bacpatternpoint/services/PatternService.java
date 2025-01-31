@@ -3,16 +3,11 @@ package nl.bo.bacpatternpoint.services;
 import jakarta.transaction.Transactional;
 import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.exception.RecordNotFoundException;
-import nl.bo.bacpatternpoint.mappers.AbbreviationMapper;
 import nl.bo.bacpatternpoint.mappers.PatternMapper;
-import nl.bo.bacpatternpoint.mappers.StepMapper;
-import nl.bo.bacpatternpoint.models.Abbreviation;
 import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Pattern;
-import nl.bo.bacpatternpoint.models.Step;
 import nl.bo.bacpatternpoint.repositories.PatternRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -33,11 +28,19 @@ public class PatternService {
     public PatternResponseDto updatePattern(Long id, PatternUpdateDto patternUpdateDto){
         Pattern pattern = patternRepository.findById(id).orElseThrow(()-> new RuntimeException("Geen patroon gevonde met id " + id));
 
-        Pattern updatedPattern = PatternMapper.toEntity(patternUpdateDto);
+        pattern.setTitle(patternUpdateDto.getTitle());
+        pattern.setLevel(patternUpdateDto.getLevel());
+        pattern.setDescription(patternUpdateDto.getDescription());
+        pattern.setHookSize(patternUpdateDto.getHookSize());
+        pattern.setAmountOfYarn(patternUpdateDto.getAmountOfYarn());
+        pattern.setTypeYarn(patternUpdateDto.getTypeYarn());
+        pattern.setScissor(patternUpdateDto.isScissor());
+        pattern.setDarningNeedle(patternUpdateDto.isDarningNeedle());
+        pattern.setMeasuringTape(patternUpdateDto.isMeasuringTape());
+        pattern.setLength(patternUpdateDto.getLength());
+        pattern.setWidth(patternUpdateDto.getWidth());
 
-        updatedPattern.setId(pattern.getId());
-
-        Pattern savedPattern = patternRepository.save(updatedPattern);
+        Pattern savedPattern = patternRepository.save(pattern);
 
         return PatternMapper.toResponseDto(savedPattern);
     }
@@ -58,7 +61,6 @@ public class PatternService {
         return true;
     }
 
-
     @Transactional
     public Image getPatternImg(Long patternId) {
 
@@ -66,7 +68,6 @@ public class PatternService {
         if(optionalPattern.isEmpty()){
             throw new RecordNotFoundException("Patroon met nummer " + patternId + " niet gevonden.");
         }
-
 
         return optionalPattern.get().getImage();
     }
@@ -81,6 +82,5 @@ public class PatternService {
         pattern.setImage(image);
         return patternRepository.save(pattern);
     }
-
 
 }

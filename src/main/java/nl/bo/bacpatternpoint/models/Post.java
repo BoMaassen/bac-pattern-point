@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-
-import java.util.List;
-
 @Entity
 @Table(name = "posts")
 public class Post {
@@ -29,7 +26,6 @@ public class Post {
     private Image image;
 
     public Post() {
-
     }
 
     public Post(String title, String category, String description, int likes, boolean isDraft) {
@@ -99,5 +95,4 @@ public class Post {
     public void setDraft(boolean draft) {
         isDraft = draft;
     }
-
 }

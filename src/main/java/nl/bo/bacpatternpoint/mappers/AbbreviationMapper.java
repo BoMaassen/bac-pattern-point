@@ -4,7 +4,6 @@ import nl.bo.bacpatternpoint.dtos.AbbreviationCreateDto;
 import nl.bo.bacpatternpoint.dtos.AbbreviationResponseDto;
 import nl.bo.bacpatternpoint.dtos.AbbreviationUpdateDto;
 import nl.bo.bacpatternpoint.models.Abbreviation;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +42,4 @@ public class AbbreviationMapper {
     public static List<Abbreviation> toEntityListUpdate(List<AbbreviationUpdateDto> abbreviationUpdateDtos){
         return abbreviationUpdateDtos.stream().map(AbbreviationMapper::toEntity).collect(Collectors.toList());
     }
-
-
-
 }

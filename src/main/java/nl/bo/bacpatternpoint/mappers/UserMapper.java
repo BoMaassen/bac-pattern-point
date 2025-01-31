@@ -4,7 +4,6 @@ import nl.bo.bacpatternpoint.dtos.UserCreateDto;
 import nl.bo.bacpatternpoint.dtos.UserResponseDto;
 import nl.bo.bacpatternpoint.dtos.UserUpdateDto;
 import nl.bo.bacpatternpoint.models.User;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

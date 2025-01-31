@@ -2,7 +2,6 @@ package nl.bo.bacpatternpoint.mappers;
 
 import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.models.Pattern;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -70,5 +69,4 @@ public class PatternMapper {
     public static List<PatternResponseDto> toResponseDtoList(List<Pattern> patterns) {
         return patterns.stream().map(PatternMapper::toResponseDto).collect(Collectors.toList());
     }
-
 }

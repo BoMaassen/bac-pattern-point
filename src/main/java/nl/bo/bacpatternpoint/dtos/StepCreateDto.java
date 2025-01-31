@@ -2,7 +2,6 @@ package nl.bo.bacpatternpoint.dtos;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import nl.bo.bacpatternpoint.models.Pattern;
 
 public class StepCreateDto {
     @NotNull(message = "Titel is verplicht")
@@ -27,6 +26,5 @@ public class StepCreateDto {
     public void setTitle(String title) {
         this.title = title;
     }
-
 }
 
