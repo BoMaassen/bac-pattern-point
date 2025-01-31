@@ -5,11 +5,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-
-import java.util.List;
-
 @Entity
-@Table(name = "Posts")
+@Table(name = "posts")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,12 +21,10 @@ public class Post {
     private String description;
     private int likes;
     private boolean isDraft;
-    @OneToOne
-    @JsonIgnoreProperties(value = {"contents", "contentType"})
+    @OneToOne(cascade = CascadeType.ALL)
     private Image image;
 
     public Post() {
-
     }
 
     public Post(String title, String category, String description, int likes, boolean isDraft) {
@@ -99,5 +94,4 @@ public class Post {
     public void setDraft(boolean draft) {
         isDraft = draft;
     }
-
 }

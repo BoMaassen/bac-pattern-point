@@ -1,16 +1,16 @@
 package nl.bo.bacpatternpoint.config;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class PasswordEncoderUtil {
+    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
     public static void main(String[] args) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String rawPassword = "haker1iscool";
         String encodedPassword = encoder.encode(rawPassword);
         System.out.println(encodedPassword);
     }
-
-
-    private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public static String encodePassword(String rawPassword) {
         return encoder.encode(rawPassword);

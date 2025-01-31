@@ -20,7 +20,6 @@ public class UserService {
     }
 
     public UserResponseDto createUser(UserCreateDto userCreateDto){
-
         String encodedPassword = PasswordEncoderUtil.encodePassword(userCreateDto.getPassword());
 
         User newUser = userRepository.save(UserMapper.toEntity(userCreateDto, encodedPassword));
@@ -37,9 +36,9 @@ public class UserService {
         User updatedUser = UserMapper.toEntity(userUpdateDto, encodedPassword);
 
         updatedUser.setId(user.getId());
-        updatedUser = userRepository.save(updatedUser);
+        User savedUser = userRepository.save(updatedUser);
 
-        return UserMapper.toResponseDto(updatedUser);
+        return UserMapper.toResponseDto(savedUser);
         } else throw new RuntimeException("niet toegestaan om een andere gebruiker te wijzigen");
 
 
@@ -66,8 +65,4 @@ public class UserService {
         }
        else throw new RuntimeException("niet toegestaan om een andere gebruiker te verwijderen");
     }
-
-
-
-
 }

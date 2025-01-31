@@ -8,18 +8,14 @@ public class UserCreateDto {
     @NotBlank(message = "Gebruikersnaam is verplicht")
     @Size(max = 255, message = "Gebruikersnaam mag maximaal 255 tekens lang zijn")
     private String username;
-
     @NotBlank(message = "Wachtwoord is verplicht")
     @Size(min = 8, max = 255, message = "Wachtwoord moet tussen 8 en 255 tekens lang zijn")
     private String password;
-
     @NotBlank(message = "Rol is verplicht")
     private String role;
-
     @NotBlank(message = "Email is verplicht")
     @Email(message = "Email moet een geldig e-mailadres zijn")
     private String email;
-
     @Size(max = 500, message = "Biografie mag maximaal 500 tekens lang zijn")
     private String biography;
 
