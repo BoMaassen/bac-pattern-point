@@ -12,7 +12,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pattern/{patternId}/abbreviation")
+@RequestMapping("/patterns/{patternId}/abbreviations")
 public class AbbreviationController {
 
     private final AbbreviationService abbreviationService;
@@ -21,12 +21,14 @@ public class AbbreviationController {
         this.abbreviationService = abbreviationService;
     }
 
+
     @PostMapping
-    public ResponseEntity<AbbreviationResponseDto> createAbbreviation(@PathVariable Long patternId, @RequestBody AbbreviationCreateDto abbreviationCreateDto){
-        AbbreviationResponseDto abbreviationResponseDto = abbreviationService.createAbbreviation(patternId, abbreviationCreateDto);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(abbreviationResponseDto.getId()).toUri();
-        return ResponseEntity.created(location).body(abbreviationResponseDto);
+    public ResponseEntity<List<AbbreviationResponseDto>> createAbbreviations(@PathVariable Long patternId, @RequestBody List<AbbreviationCreateDto> abbreviationCreateDtos){
+        List<AbbreviationResponseDto> abbreviationResponseDtos = abbreviationService.createAbbreviations(patternId, abbreviationCreateDtos);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(abbreviationResponseDtos.get(0).getId()).toUri();
+        return ResponseEntity.created(location).body(abbreviationResponseDtos);
     }
+
 
     @PutMapping("/{abbreviationId}")
     public ResponseEntity<AbbreviationResponseDto> updateAbbreviaiton(@PathVariable Long patternId, @PathVariable Long abbreviationId, @RequestBody AbbreviationUpdateDto abbreviationUpdateDto){

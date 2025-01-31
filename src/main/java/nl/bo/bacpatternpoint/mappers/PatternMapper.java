@@ -2,11 +2,12 @@ package nl.bo.bacpatternpoint.mappers;
 
 import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.models.Pattern;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class PatternMapper {
-    public static PatternResponseDto toResponseDto(Pattern pattern){
+    public static PatternResponseDto toResponseDto(Pattern pattern) {
         PatternResponseDto dto = new PatternResponseDto();
         dto.setId(pattern.getId());
         dto.setTitle(pattern.getTitle());
@@ -20,13 +21,20 @@ public class PatternMapper {
         dto.setMeasuringTape(pattern.isMeasuringTape());
         dto.setLength(pattern.getLength());
         dto.setWidth(pattern.getWidth());
-        dto.setImage(pattern.getImage());
-        dto.setAbbreviations(AbbreviationMapper.toResponseDtoList(pattern.getAbbreviations()));
-        dto.setSteps(StepMapper.toResponseDtoList(pattern.getSteps()));
+        if (pattern.getImage() != null) {
+            dto.setImage(ImageMapper.toResponseDto(pattern.getImage()));
+        }
+        if (pattern.getAbbreviations() != null) {
+            dto.setAbbreviations(AbbreviationMapper.toResponseDtoList(pattern.getAbbreviations()));
+        }
+        if (pattern.getSteps() != null) {
+            dto.setSteps(StepMapper.toResponseDtoList(pattern.getSteps()));
+        }
+
         return dto;
     }
 
-    public static Pattern toEntity(PatternCreateDto patternCreateDto){
+    public static Pattern toEntity(PatternCreateDto patternCreateDto) {
         Pattern pattern = new Pattern();
         pattern.setTitle(patternCreateDto.getTitle());
         pattern.setLevel(patternCreateDto.getLevel());
@@ -42,7 +50,7 @@ public class PatternMapper {
         return pattern;
     }
 
-    public static Pattern toEntity(PatternUpdateDto patternUpdateDto){
+    public static Pattern toEntity(PatternUpdateDto patternUpdateDto) {
         Pattern pattern = new Pattern();
         pattern.setTitle(patternUpdateDto.getTitle());
         pattern.setLevel(patternUpdateDto.getLevel());
@@ -59,7 +67,7 @@ public class PatternMapper {
         return pattern;
     }
 
-    public static List<PatternResponseDto> toResponseDtoList(List<Pattern> patterns){
+    public static List<PatternResponseDto> toResponseDtoList(List<Pattern> patterns) {
         return patterns.stream().map(PatternMapper::toResponseDto).collect(Collectors.toList());
     }
 

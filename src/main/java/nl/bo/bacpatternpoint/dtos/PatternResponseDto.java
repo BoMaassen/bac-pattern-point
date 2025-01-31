@@ -20,26 +20,16 @@ public class PatternResponseDto {
     private boolean measuringTape;
     private double length;
     private double width;
-    @JsonIgnoreProperties(value = {"contents", "contentType"})
-    private Image image;
+    private ImageResponseDto image;
     private List<StepResponseDto> steps;
     private List<AbbreviationResponseDto> abbreviations;
 
-
-    public Image getImage() {
+    public ImageResponseDto getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(ImageResponseDto image) {
         this.image = image;
-    }
-
-    public List<AbbreviationResponseDto> getAbbreviations() {
-        return abbreviations;
-    }
-
-    public void setAbbreviations(List<AbbreviationResponseDto> abbreviations) {
-        this.abbreviations = abbreviations;
     }
 
     public List<StepResponseDto> getSteps() {
@@ -48,6 +38,14 @@ public class PatternResponseDto {
 
     public void setSteps(List<StepResponseDto> steps) {
         this.steps = steps;
+    }
+
+    public List<AbbreviationResponseDto> getAbbreviations() {
+        return abbreviations;
+    }
+
+    public void setAbbreviations(List<AbbreviationResponseDto> abbreviations) {
+        this.abbreviations = abbreviations;
     }
 
     public Long getId() {

@@ -16,12 +16,6 @@ public class Image {
     private String url;
     @Lob
     private byte[] contents;
-    /*@OneToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id")
-    private Post post;*/
-    /*@OneToOne*/
-   /* @JoinColumn(name = "pattern_id", referencedColumnName = "id")
-    private Pattern pattern;*/
 
     public Image() {
     }

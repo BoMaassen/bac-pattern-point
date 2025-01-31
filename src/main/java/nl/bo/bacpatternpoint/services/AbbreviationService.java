@@ -8,6 +8,7 @@ import nl.bo.bacpatternpoint.repositories.AbbreviationRepository;
 import nl.bo.bacpatternpoint.repositories.PatternRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,15 +23,17 @@ public class AbbreviationService {
         this.patternRepository = patternRepository;
     }
 
-    public AbbreviationResponseDto createAbbreviation(Long patternId, AbbreviationCreateDto abbreviationCreateDto){
+    public List<AbbreviationResponseDto> createAbbreviations(Long patternId, List<AbbreviationCreateDto> abbreviationCreateDto){
        Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RuntimeException("Geen patroon gevonden met id " + patternId));
 
-        Abbreviation abbreviation = AbbreviationMapper.toEntity(abbreviationCreateDto);
-        abbreviation.setPattern(pattern);
+        List<Abbreviation> abbreviations = AbbreviationMapper.toEntityListCreate(abbreviationCreateDto);
+        for (Abbreviation abbreviation : abbreviations) {
+            abbreviation.setPattern(pattern);
+        }
+        List<Abbreviation> savedAbbreviations = abbreviationRepository.saveAll(abbreviations);
 
-        Abbreviation savedAbbreviation = abbreviationRepository.save(abbreviation);
 
-        return AbbreviationMapper.toResponseDto(savedAbbreviation);
+        return AbbreviationMapper.toResponseDtoList(savedAbbreviations);
     }
 
     public AbbreviationResponseDto updateAbbreviation(Long patternId, Long abbreviationId, AbbreviationUpdateDto abbreviationUpdateDto){
