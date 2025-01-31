@@ -21,8 +21,7 @@ public class Post {
     private String description;
     private int likes;
     private boolean isDraft;
-    @OneToOne
-    @JsonIgnoreProperties(value = {"contents", "contentType"})
+    @OneToOne(cascade = CascadeType.ALL)
     private Image image;
 
     public Post() {

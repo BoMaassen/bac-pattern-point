@@ -34,8 +34,7 @@ public class Pattern {
     private double length;
     @Positive(message = "Breedte moet groter dan 0cm zijn")
     private double width;
-    @OneToOne
-    @JsonIgnoreProperties(value = {"contents", "contentType"})
+    @OneToOne(cascade = CascadeType.ALL)
     private Image image;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Step> steps;
