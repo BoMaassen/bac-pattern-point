@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/comments")
+@RequestMapping("/comments/{commentId}")
 public class CommentController {
     private final CommentService commentService;
 
@@ -21,26 +21,26 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    @PostMapping("/{commentId}/comments")
+    @PostMapping("/comments")
     public ResponseEntity<CommentResponseDto> createCommentByComment(@Valid @PathVariable Long commentId, @RequestBody CommentCreateDto commentCreateDto){
     CommentResponseDto commentResponseDto = commentService.createCommentByComment(commentId, commentCreateDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(commentResponseDto.getId()).toUri();
         return ResponseEntity.created(location).body(commentResponseDto);
     }
 
-    @PutMapping("/{commentId}")
+    @PutMapping
     public ResponseEntity<CommentResponseDto> updateComment(@Valid @PathVariable Long commentId, @RequestBody CommentUpdateDto commentUpdateDto){
         CommentResponseDto commentResponseDto = commentService.updateComment(commentId, commentUpdateDto);
         return ResponseEntity.ok(commentResponseDto);
     }
 
-    @DeleteMapping("/{commentId}")
+    @DeleteMapping
     public ResponseEntity<Void> deleteComment(@PathVariable Long commentId){
         boolean isDeleted = commentService.deleteComment(commentId);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/{commentId}")
+    @GetMapping
     public ResponseEntity<List<CommentResponseDto>> getCommentsForComment(@PathVariable Long commentId) {
         List<CommentResponseDto> comments = commentService.getCommentsForComment(commentId);
         return ResponseEntity.ok(comments);
