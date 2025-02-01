@@ -3,6 +3,7 @@ package nl.bo.bacpatternpoint.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 @Entity
@@ -25,6 +26,9 @@ public class Post {
     private Image image;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public Post() {
     }
@@ -35,6 +39,14 @@ public class Post {
         this.description = description;
         this.likes = likes;
         this.isDraft = isDraft;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public List<Comment> getComments() {

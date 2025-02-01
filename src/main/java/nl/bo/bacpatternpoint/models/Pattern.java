@@ -43,6 +43,17 @@ public class Pattern {
     private List<Abbreviation> abbreviations;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
     private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<Comment> getComments() {
         return comments;

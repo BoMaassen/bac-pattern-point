@@ -2,6 +2,8 @@ package nl.bo.bacpatternpoint.models;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -18,6 +20,36 @@ public class User {
     @Column(unique = true, nullable = false)
     private String email;
     private String biography;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Pattern> patterns;
+
+    public List<Pattern> getPatterns() {
+        return patterns;
+    }
+
+    public void setPatterns(List<Pattern> patterns) {
+        this.patterns = patterns;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public String getEmail() {
         return email;
