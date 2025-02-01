@@ -1,4 +1,5 @@
 package nl.bo.bacpatternpoint.dtos;
+
 import java.time.LocalDate;
 
 public class CommentResponseDto {
@@ -6,6 +7,15 @@ public class CommentResponseDto {
     private String message;
     private LocalDate timeStamp;
     private int likes;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getMessage() {
         return message;

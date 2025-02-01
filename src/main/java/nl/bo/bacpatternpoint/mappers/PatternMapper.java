@@ -20,6 +20,7 @@ public class PatternMapper {
         dto.setMeasuringTape(pattern.isMeasuringTape());
         dto.setLength(pattern.getLength());
         dto.setWidth(pattern.getWidth());
+        dto.setUsername(pattern.getUser().getUsername());
         if (pattern.getImage() != null) {
             dto.setImage(ImageMapper.toResponseDto(pattern.getImage()));
         }

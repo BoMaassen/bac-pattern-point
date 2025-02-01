@@ -16,6 +16,7 @@ public class CommentMapper {
         dto.setMessage(comment.getMessage());
         dto.setTimeStamp(comment.getTimeStamp());
         dto.setLikes(comment.getLikes());
+        dto.setUsername(comment.getUser().getUsername());
         return dto;
     }
 
