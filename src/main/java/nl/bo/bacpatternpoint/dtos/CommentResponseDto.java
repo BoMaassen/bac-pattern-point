@@ -1,17 +1,9 @@
-package nl.bo.bacpatternpoint.models;
-
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.CreationTimestamp;
-
+package nl.bo.bacpatternpoint.dtos;
 import java.time.LocalDate;
 
-public class Comment {
+public class CommentResponseDto {
     private Long id;
-    @NotNull(message = "Reactie is verplicht")
-    @Size(min = 1, max = 150, message = "Reactie moet tussen 1 en 150 karakters zijn")
     private String message;
-    @CreationTimestamp
     private LocalDate timeStamp;
     private int likes;
 
