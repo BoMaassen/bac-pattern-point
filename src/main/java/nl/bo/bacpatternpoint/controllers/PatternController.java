@@ -76,7 +76,7 @@ public class PatternController {
 
     @GetMapping("/{patternId}/comments")
     public ResponseEntity<List<CommentResponseDto>> getCommentsForPattern(@PathVariable Long patternId) {
-        List<CommentResponseDto> comments = commentService.getCommentsForPost(patternId);
+        List<CommentResponseDto> comments = commentService.getCommentsForPattern(patternId);
         return ResponseEntity.ok(comments);
     }
 
