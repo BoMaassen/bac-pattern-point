@@ -20,6 +20,7 @@ public class PatternMapper {
         dto.setMeasuringTape(pattern.isMeasuringTape());
         dto.setLength(pattern.getLength());
         dto.setWidth(pattern.getWidth());
+        dto.setDraft(pattern.isDraft());
         dto.setUsername(pattern.getUser().getUsername());
         if (pattern.getImage() != null) {
             dto.setImage(ImageMapper.toResponseDto(pattern.getImage()));
@@ -47,6 +48,7 @@ public class PatternMapper {
         pattern.setMeasuringTape(patternCreateDto.isMeasuringTape());
         pattern.setLength(patternCreateDto.getLength());
         pattern.setWidth(patternCreateDto.getWidth());
+        pattern.setDraft(patternCreateDto.isDraft());
         return pattern;
     }
 
@@ -63,6 +65,7 @@ public class PatternMapper {
         pattern.setMeasuringTape(patternUpdateDto.isMeasuringTape());
         pattern.setLength(patternUpdateDto.getLength());
         pattern.setWidth(patternUpdateDto.getWidth());
+        pattern.setDraft(patternUpdateDto.isDraft());
 
         return pattern;
     }

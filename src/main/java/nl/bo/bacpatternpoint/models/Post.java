@@ -30,17 +30,6 @@ public class Post {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    public Post() {
-    }
-
-    public Post(String title, String category, String description, int likes, boolean isDraft) {
-        this.title = title;
-        this.category = category;
-        this.description = description;
-        this.likes = likes;
-        this.isDraft = isDraft;
-    }
-
     public User getUser() {
         return user;
     }

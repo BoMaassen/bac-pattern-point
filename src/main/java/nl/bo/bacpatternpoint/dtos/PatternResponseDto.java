@@ -15,10 +15,19 @@ public class PatternResponseDto {
     private boolean measuringTape;
     private double length;
     private double width;
+    private boolean isDraft;
     private ImageResponseDto image;
     private List<StepResponseDto> steps;
     private List<AbbreviationResponseDto> abbreviations;
     private String username;
+
+    public boolean isDraft() {
+        return isDraft;
+    }
+
+    public void setDraft(boolean draft) {
+        isDraft = draft;
+    }
 
     public String getUsername() {
         return username;

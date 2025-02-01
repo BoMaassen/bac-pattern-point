@@ -35,6 +35,7 @@ public class Pattern {
     private double length;
     @Positive(message = "Breedte moet groter dan 0cm zijn")
     private double width;
+    private boolean isDraft;
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -46,6 +47,14 @@ public class Pattern {
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    public boolean isDraft() {
+        return isDraft;
+    }
+
+    public void setDraft(boolean draft) {
+        isDraft = draft;
+    }
 
     public User getUser() {
         return user;

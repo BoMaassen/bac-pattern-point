@@ -26,6 +26,15 @@ public class PatternUpdateDto {
     private double length;
     @Positive(message = "Breedte moet groter dan 0cm zijn")
     private double width;
+    private boolean isDraft;
+
+    public boolean isDraft() {
+        return isDraft;
+    }
+
+    public void setDraft(boolean draft) {
+        isDraft = draft;
+    }
 
     public double getWidth() {
         return width;
