@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 @Entity
@@ -40,6 +41,16 @@ public class Pattern {
     private List<Step> steps;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Abbreviation> abbreviations;
+    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public List<Abbreviation> getAbbreviations() {
         return abbreviations;

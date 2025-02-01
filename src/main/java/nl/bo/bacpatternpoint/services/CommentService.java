@@ -49,12 +49,17 @@ public class CommentService {
 
         return CommentMapper.toResponseDto(savedComment);
     }
+
     public CommentResponseDto createCommentByComment(Long commentId, CommentCreateDto commentCreateDto) {
-        Comment comment = commentRepository.findById(commentId)
+        Comment parentComment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new RuntimeException("Reactie niet gevonden met id " + commentId));
 
+        if (parentComment.getParentComment() != null) {
+            throw new RuntimeException("Je kunt geen reactie plaatsen op een sub-comment.");
+        }
+
         Comment newComment = CommentMapper.toEntity(commentCreateDto);
-        comment.setComment(comment);
+        newComment.setParentComment(parentComment);
         Comment savedComment = commentRepository.save(newComment);
 
         return CommentMapper.toResponseDto(savedComment);
@@ -63,7 +68,7 @@ public class CommentService {
     public List<CommentResponseDto> getCommentsForComment(Long commentId){
        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new RuntimeException("Geen comment gevonden met id " + commentId));
 
-        List<Comment> comments = comment.getComments();
+        List<Comment> comments = comment.getSubComments();
 
         return CommentMapper.toResponseDtoList(comments);
     }
