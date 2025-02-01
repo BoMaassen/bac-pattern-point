@@ -10,7 +10,9 @@ import nl.bo.bacpatternpoint.models.Post;
 import nl.bo.bacpatternpoint.repositories.CommentRepository;
 import nl.bo.bacpatternpoint.repositories.PatternRepository;
 import nl.bo.bacpatternpoint.repositories.PostRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentService {
 
     private final CommentRepository commentRepository;
@@ -66,8 +68,8 @@ public class CommentService {
         return CommentMapper.toResponseDto(updatedComment);
     }
 
-    public boolean deleteComment(Long commentId){
-        commentRepository.deleteById(commentId);
+    public boolean deleteComment(Long id){
+        commentRepository.deleteById(id);
         return true;
     }
 

@@ -27,7 +27,7 @@ public class StepController {
     }
 
     @PutMapping("/{stepId}")
-    public ResponseEntity<StepResponseDto> updateSteps(@PathVariable Long patternId, @PathVariable Long stepId, @RequestBody StepUpdateDto stepUpdateDto) {
+    public ResponseEntity<StepResponseDto> updateStep(@PathVariable Long patternId, @PathVariable Long stepId, @RequestBody StepUpdateDto stepUpdateDto) {
         StepResponseDto stepResponseDto = stepService.updateStep(patternId, stepId, stepUpdateDto);
         return ResponseEntity.ok(stepResponseDto);
     }
