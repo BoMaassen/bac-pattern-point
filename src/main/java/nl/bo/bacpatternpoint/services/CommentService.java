@@ -3,6 +3,8 @@ package nl.bo.bacpatternpoint.services;
 import nl.bo.bacpatternpoint.dtos.CommentCreateDto;
 import nl.bo.bacpatternpoint.dtos.CommentResponseDto;
 import nl.bo.bacpatternpoint.dtos.CommentUpdateDto;
+import nl.bo.bacpatternpoint.exception.InvalidActionException;
+import nl.bo.bacpatternpoint.exception.RecordNotFoundException;
 import nl.bo.bacpatternpoint.mappers.CommentMapper;
 import nl.bo.bacpatternpoint.models.Comment;
 import nl.bo.bacpatternpoint.models.Pattern;
@@ -14,6 +16,7 @@ import nl.bo.bacpatternpoint.repositories.PostRepository;
 import nl.bo.bacpatternpoint.repositories.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,13 +38,13 @@ public class CommentService {
 
     public CommentResponseDto createCommentByPost(Long postId, CommentCreateDto commentCreateDto) {
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post niet gevonden met id " + postId));
+                .orElseThrow(() -> new RecordNotFoundException("Post niet gevonden met id " + postId));
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
 
         User user = userRepository.findByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("User niet gevonden met username " + currentUsername));
+                .orElseThrow(() -> new UsernameNotFoundException("User niet gevonden met username " + currentUsername));
 
         Comment comment = CommentMapper.toEntity(commentCreateDto);
         comment.setPost(post);
@@ -53,13 +56,13 @@ public class CommentService {
 
     public CommentResponseDto createCommentByPattern(Long patternId, CommentCreateDto commentCreateDto) {
         Pattern pattern = patternRepository.findById(patternId)
-                .orElseThrow(() -> new RuntimeException("Patroon niet gevonden met id " + patternId));
+                .orElseThrow(() -> new RecordNotFoundException("Patroon niet gevonden met id " + patternId));
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
 
         User user = userRepository.findByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("User niet gevonden met username " + currentUsername));
+                .orElseThrow(() -> new UsernameNotFoundException("User niet gevonden met username " + currentUsername));
 
         Comment comment = CommentMapper.toEntity(commentCreateDto);
         comment.setPattern(pattern);
@@ -71,17 +74,17 @@ public class CommentService {
 
     public CommentResponseDto createCommentByComment(Long commentId, CommentCreateDto commentCreateDto) {
         Comment parentComment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new RuntimeException("Reactie niet gevonden met id " + commentId));
+                .orElseThrow(() -> new RecordNotFoundException("Reactie niet gevonden met id " + commentId));
 
         if (parentComment.getParentComment() != null) {
-            throw new RuntimeException("Je kunt geen reactie plaatsen op een sub-comment.");
+            throw new InvalidActionException("Je kunt geen reactie plaatsen op een sub-comment.");
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
 
         User user = userRepository.findByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("User niet gevonden met username " + currentUsername));
+                .orElseThrow(() -> new UsernameNotFoundException("User niet gevonden met username " + currentUsername));
 
         Comment newComment = CommentMapper.toEntity(commentCreateDto);
         newComment.setParentComment(parentComment);
@@ -92,7 +95,7 @@ public class CommentService {
     }
 
     public List<CommentResponseDto> getCommentsForComment(Long commentId) {
-        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new RuntimeException("Geen comment gevonden met id " + commentId));
+        Comment comment = commentRepository.findById(commentId).orElseThrow(() -> new RecordNotFoundException("Geen comment gevonden met id " + commentId));
 
         List<Comment> comments = comment.getSubComments();
 
@@ -100,7 +103,7 @@ public class CommentService {
     }
 
     public List<CommentResponseDto> getCommentsForPattern(Long patternId) {
-        Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RuntimeException("Geen patroon gevonden met id " + patternId));
+        Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RecordNotFoundException("Geen patroon gevonden met id " + patternId));
 
         List<Comment> comments = pattern.getComments();
 
@@ -108,7 +111,7 @@ public class CommentService {
     }
 
     public List<CommentResponseDto> getCommentsForPost(Long postId) {
-        Post post = postRepository.findById(postId).orElseThrow(() -> new RuntimeException("Geen post gevonden met id " + postId));
+        Post post = postRepository.findById(postId).orElseThrow(() -> new RecordNotFoundException("Geen post gevonden met id " + postId));
 
         List<Comment> comments = post.getComments();
 
@@ -117,7 +120,7 @@ public class CommentService {
 
     public CommentResponseDto updateComment(Long commentId, CommentUpdateDto commentUpdateDto) {
         Comment comment = commentRepository.findById(commentId)
-                .orElseThrow(() -> new RuntimeException("Comment niet gevonden met id " + commentId));
+                .orElseThrow(() -> new RecordNotFoundException("Comment niet gevonden met id " + commentId));
 
         comment.setMessage(commentUpdateDto.getMessage());
 

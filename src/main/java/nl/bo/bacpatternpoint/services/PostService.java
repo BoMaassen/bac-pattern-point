@@ -11,6 +11,7 @@ import nl.bo.bacpatternpoint.repositories.PostRepository;
 import nl.bo.bacpatternpoint.repositories.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,7 @@ public class PostService {
         String currentUsername = authentication.getName();
 
         User user = userRepository.findByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("User niet gevonden met username " + currentUsername));
+                .orElseThrow(() -> new UsernameNotFoundException("User niet gevonden met username " + currentUsername));
 
         Post post = PostMapper.toEntity(postCreateDto);
         post.setUser(user);
@@ -41,7 +42,7 @@ public class PostService {
     }
 
     public PostResponseDto updatePost(Long id, PostUpdateDto postUpdateDto) {
-        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Geen post gevonden met id " + id));
+        Post post = postRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Geen post gevonden met id " + id));
 
         post.setTitle(postUpdateDto.getTitle());
         post.setCategory(postUpdateDto.getCategory());
@@ -55,7 +56,7 @@ public class PostService {
     }
 
     public PostResponseDto getPostById(Long id) {
-        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Geen post gevonden met id " + id));
+        Post post = postRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Geen post gevonden met id " + id));
 
         return PostMapper.toResponseDto(post);
     }
@@ -76,7 +77,7 @@ public class PostService {
 
         Optional<Post> optionalPost = postRepository.findById(postId);
         if (optionalPost.isEmpty()) {
-            throw new RecordNotFoundException("Post met nummer " + postId + " niet gevonden.");
+            throw new RecordNotFoundException("Post met id " + postId + " niet gevonden.");
         }
         return optionalPost.get().getImage();
     }

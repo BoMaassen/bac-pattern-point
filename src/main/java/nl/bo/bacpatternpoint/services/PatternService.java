@@ -31,13 +31,13 @@ public class PatternService {
 
     public PatternResponseDto createPattern(Long postId, PatternCreateDto patternCreateDto){
         Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new RuntimeException("Post niet gevonden met id " + postId));
+                .orElseThrow(() -> new RecordNotFoundException("Post niet gevonden met id " + postId));
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
 
         User user = userRepository.findByUsername(currentUsername)
-                .orElseThrow(() -> new RuntimeException("User niet gevonden met username " + currentUsername));
+                .orElseThrow(() -> new RecordNotFoundException("User niet gevonden met username " + currentUsername));
 
         Pattern pattern = PatternMapper.toEntity(patternCreateDto);
         pattern.setPost(post);
@@ -47,7 +47,7 @@ public class PatternService {
     }
 
     public PatternResponseDto updatePattern(Long id, PatternUpdateDto patternUpdateDto){
-        Pattern pattern = patternRepository.findById(id).orElseThrow(()-> new RuntimeException("Geen patroon gevonde met id " + id));
+        Pattern pattern = patternRepository.findById(id).orElseThrow(()-> new RecordNotFoundException("Geen patroon gevonde met id " + id));
 
         pattern.setTitle(patternUpdateDto.getTitle());
         pattern.setLevel(patternUpdateDto.getLevel());
@@ -67,7 +67,7 @@ public class PatternService {
     }
 
     public PatternResponseDto getPatternById(Long id){
-        Pattern pattern = patternRepository.findById(id).orElseThrow(() -> new RuntimeException("Geen patroon gevonden met id " + id));
+        Pattern pattern = patternRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("Geen patroon gevonden met id " + id));
 
         return PatternMapper.toResponseDto(pattern);
     }
