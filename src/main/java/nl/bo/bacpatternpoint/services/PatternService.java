@@ -29,7 +29,10 @@ public class PatternService {
         this.postRepository = postRepository;
     }
 
-    public PatternResponseDto createPattern(PatternCreateDto patternCreateDto){
+    public PatternResponseDto createPattern(Long postId, PatternCreateDto patternCreateDto){
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new RuntimeException("Post niet gevonden met id " + postId));
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUsername = authentication.getName();
 
@@ -37,6 +40,7 @@ public class PatternService {
                 .orElseThrow(() -> new RuntimeException("User niet gevonden met username " + currentUsername));
 
         Pattern pattern = PatternMapper.toEntity(patternCreateDto);
+        pattern.setPost(post);
         pattern.setUser(user);
         Pattern savedPattern = patternRepository.save(pattern);
         return PatternMapper.toResponseDto(savedPattern);

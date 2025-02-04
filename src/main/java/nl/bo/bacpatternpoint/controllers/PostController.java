@@ -59,10 +59,17 @@ public class PostController {
     }
 
     @PostMapping("/{postId}/comments")
-    public ResponseEntity<CommentResponseDto> createCommentByPost(@PathVariable Long postId, @RequestBody CommentCreateDto commentCreateDto){
+    public ResponseEntity<CommentResponseDto> createCommentByPost(@Valid @PathVariable Long postId, @RequestBody CommentCreateDto commentCreateDto){
         CommentResponseDto commentResponseDto = commentService.createCommentByPost(postId, commentCreateDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(commentResponseDto.getId()).toUri();
         return ResponseEntity.created(location).body(commentResponseDto);
+    }
+
+    @PostMapping("/{postId}/patterns")
+    public ResponseEntity<PatternResponseDto> createPattern(@Valid @PathVariable Long postId, @RequestBody PatternCreateDto patternCreateDto) {
+        PatternResponseDto responseDto = patternService.createPattern(postId, patternCreateDto);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responseDto.getId()).toUri();
+        return ResponseEntity.created(location).body(responseDto);
     }
 
     @GetMapping
@@ -109,7 +116,6 @@ public class PostController {
     public ResponseEntity<PostResponseDto> updatePost(@Valid @PathVariable Long id, @RequestBody PostUpdateDto postUpdateDto) {
         PostResponseDto postResponseDto = postService.updatePost(id, postUpdateDto);
         return ResponseEntity.ok(postResponseDto);
-
     }
 
     @DeleteMapping("/{id}")

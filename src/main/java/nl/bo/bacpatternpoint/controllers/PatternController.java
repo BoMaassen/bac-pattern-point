@@ -34,13 +34,6 @@ public class PatternController {
         this.commentService = commentService;
     }
 
-    @PostMapping
-    public ResponseEntity<PatternResponseDto> createPattern(@Valid @RequestBody PatternCreateDto patternCreateDto) {
-        PatternResponseDto responseDto = patternService.createPattern(patternCreateDto);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responseDto.getId()).toUri();
-        return ResponseEntity.created(location).body(responseDto);
-    }
-
     @PostMapping("/{id}/image")
     public ResponseEntity<PatternResponseDto> addImgToPattern(@Valid @PathVariable("id") Long patternId, @RequestBody MultipartFile file) throws IOException {
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/patterns/").path(Objects.requireNonNull(patternId.toString())).path("/image").toUriString();
