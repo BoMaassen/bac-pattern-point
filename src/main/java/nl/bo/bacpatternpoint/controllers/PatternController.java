@@ -56,12 +56,6 @@ public class PatternController {
         return ResponseEntity.created(location).body(commentResponseDto);
     }
 
-    @GetMapping
-    public ResponseEntity<List<PatternResponseDto>> getPatterns() {
-        List<PatternResponseDto> patternResponseDtos = patternService.getPatterns();
-        return ResponseEntity.ok(patternResponseDtos);
-    }
-
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getPatternImg(@PathVariable("id") Long patternId) {
         Image image = patternService.getPatternImg(patternId);

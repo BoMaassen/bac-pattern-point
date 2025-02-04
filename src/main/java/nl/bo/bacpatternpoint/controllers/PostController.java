@@ -8,6 +8,7 @@ import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Post;
 import nl.bo.bacpatternpoint.services.CommentService;
 import nl.bo.bacpatternpoint.services.ImageService;
+import nl.bo.bacpatternpoint.services.PatternService;
 import nl.bo.bacpatternpoint.services.PostService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.InvalidMediaTypeException;
@@ -28,11 +29,13 @@ public class PostController {
     private final PostService postService;
     private final ImageService imageService;
     private final CommentService commentService;
+    private final PatternService patternService;
 
-    public PostController(PostService postService, ImageService imageService, CommentService commentService) {
+    public PostController(PostService postService, ImageService imageService, CommentService commentService, PatternService patternService) {
         this.postService = postService;
         this.imageService = imageService;
         this.commentService = commentService;
+        this.patternService = patternService;
     }
 
     @PostMapping
@@ -94,6 +97,12 @@ public class PostController {
     public ResponseEntity<List<CommentResponseDto>> getCommentsForPost(@PathVariable Long postId) {
         List<CommentResponseDto> comments = commentService.getCommentsForPost(postId);
         return ResponseEntity.ok(comments);
+    }
+
+    @GetMapping("/{postId}/patterns")
+    public ResponseEntity<List<PatternResponseDto>> getPatternsForPost(@PathVariable Long postId) {
+        List<PatternResponseDto> patterns = patternService.getPatternsForPost(postId);
+        return ResponseEntity.ok(patterns);
     }
 
     @PutMapping("/{id}")

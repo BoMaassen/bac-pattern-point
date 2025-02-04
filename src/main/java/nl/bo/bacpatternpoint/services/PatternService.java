@@ -6,8 +6,10 @@ import nl.bo.bacpatternpoint.exception.RecordNotFoundException;
 import nl.bo.bacpatternpoint.mappers.PatternMapper;
 import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Pattern;
+import nl.bo.bacpatternpoint.models.Post;
 import nl.bo.bacpatternpoint.models.User;
 import nl.bo.bacpatternpoint.repositories.PatternRepository;
+import nl.bo.bacpatternpoint.repositories.PostRepository;
 import nl.bo.bacpatternpoint.repositories.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,10 +21,12 @@ import java.util.Optional;
 public class PatternService {
     private final PatternRepository patternRepository;
     private final UserRepository userRepository;
+    private final PostRepository postRepository;
 
-    public PatternService(PatternRepository patternRepository, UserRepository userRepository) {
+    public PatternService(PatternRepository patternRepository, UserRepository userRepository, PostRepository postRepository) {
         this.patternRepository = patternRepository;
         this.userRepository = userRepository;
+        this.postRepository = postRepository;
     }
 
     public PatternResponseDto createPattern(PatternCreateDto patternCreateDto){
@@ -64,8 +68,14 @@ public class PatternService {
         return PatternMapper.toResponseDto(pattern);
     }
 
-    public List<PatternResponseDto> getPatterns(){
-        List<Pattern> patterns = patternRepository.findAll();
+    public List<PatternResponseDto> getPatternsForPost(Long postId){
+        Optional<Post> optionalPost = postRepository.findById(postId);
+        if(optionalPost.isEmpty()){
+            throw new RecordNotFoundException("Post met nummer " + postId + " niet gevonden.");
+        }
+
+        List<Pattern> patterns = optionalPost.get().getPatterns();
+
         return PatternMapper.toResponseDtoList(patterns);
     }
 
