@@ -5,6 +5,7 @@ import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.mappers.PatternMapper;
 import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Pattern;
+import nl.bo.bacpatternpoint.services.CommentService;
 import nl.bo.bacpatternpoint.services.ImageService;
 import nl.bo.bacpatternpoint.services.PatternService;
 import org.springframework.http.HttpHeaders;
@@ -25,10 +26,12 @@ public class PatternController {
 
     private final PatternService patternService;
     private final ImageService imageService;
+    private final CommentService commentService;
 
-    public PatternController(PatternService patternService, ImageService imageService) {
+    public PatternController(PatternService patternService, ImageService imageService, CommentService commentService) {
         this.patternService = patternService;
         this.imageService = imageService;
+        this.commentService = commentService;
     }
 
     @PostMapping
@@ -46,6 +49,12 @@ public class PatternController {
         return ResponseEntity.created(URI.create(url)).body(PatternMapper.toResponseDto(pattern));
     }
 
+    @PostMapping("/{patternId}/comments")
+    public ResponseEntity<CommentResponseDto> createCommentByPattern(@PathVariable Long patternId, @RequestBody CommentCreateDto commentCreateDto){
+        CommentResponseDto commentResponseDto = commentService.createCommentByPattern(patternId, commentCreateDto);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(commentResponseDto.getId()).toUri();
+        return ResponseEntity.created(location).body(commentResponseDto);
+    }
 
     @GetMapping
     public ResponseEntity<List<PatternResponseDto>> getPatterns() {
@@ -63,6 +72,12 @@ public class PatternController {
             mediaType = MediaType.APPLICATION_OCTET_STREAM;
         }
         return ResponseEntity.ok().contentType(mediaType).header(HttpHeaders.CONTENT_DISPOSITION, "inline;filename=" + image.getTitle()).body(image.getContents());
+    }
+
+    @GetMapping("/{patternId}/comments")
+    public ResponseEntity<List<CommentResponseDto>> getCommentsForPattern(@PathVariable Long patternId) {
+        List<CommentResponseDto> comments = commentService.getCommentsForPattern(patternId);
+        return ResponseEntity.ok(comments);
     }
 
     @GetMapping("/{id}")

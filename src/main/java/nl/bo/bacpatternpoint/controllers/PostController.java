@@ -3,8 +3,10 @@ package nl.bo.bacpatternpoint.controllers;
 import jakarta.validation.Valid;
 import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.mappers.PostMapper;
+import nl.bo.bacpatternpoint.models.Comment;
 import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Post;
+import nl.bo.bacpatternpoint.services.CommentService;
 import nl.bo.bacpatternpoint.services.ImageService;
 import nl.bo.bacpatternpoint.services.PostService;
 import org.springframework.http.HttpHeaders;
@@ -25,10 +27,12 @@ import java.util.Objects;
 public class PostController {
     private final PostService postService;
     private final ImageService imageService;
+    private final CommentService commentService;
 
-    public PostController(PostService postService, ImageService imageService) {
+    public PostController(PostService postService, ImageService imageService, CommentService commentService) {
         this.postService = postService;
         this.imageService = imageService;
+        this.commentService = commentService;
     }
 
     @PostMapping
@@ -49,6 +53,13 @@ public class PostController {
         Image image = imageService.storeFile(file, url);
         Post post = postService.addImg(postId, image);
         return ResponseEntity.created(URI.create(url)).body(PostMapper.toResponseDto(post));
+    }
+
+    @PostMapping("/{postId}/comments")
+    public ResponseEntity<CommentResponseDto> createCommentByPost(@PathVariable Long postId, @RequestBody CommentCreateDto commentCreateDto){
+        CommentResponseDto commentResponseDto = commentService.createCommentByPost(postId, commentCreateDto);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(commentResponseDto.getId()).toUri();
+        return ResponseEntity.created(location).body(commentResponseDto);
     }
 
     @GetMapping
@@ -77,6 +88,12 @@ public class PostController {
     public ResponseEntity<PostResponseDto> getPostById(@PathVariable Long id) {
         PostResponseDto postResponseDto = postService.getPostById(id);
         return ResponseEntity.ok(postResponseDto);
+    }
+
+    @GetMapping("/{postId}/comments")
+    public ResponseEntity<List<CommentResponseDto>> getCommentsForPost(@PathVariable Long postId) {
+        List<CommentResponseDto> comments = commentService.getCommentsForPost(postId);
+        return ResponseEntity.ok(comments);
     }
 
     @PutMapping("/{id}")

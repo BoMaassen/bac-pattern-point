@@ -6,7 +6,11 @@ import nl.bo.bacpatternpoint.exception.RecordNotFoundException;
 import nl.bo.bacpatternpoint.mappers.PatternMapper;
 import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Pattern;
+import nl.bo.bacpatternpoint.models.User;
 import nl.bo.bacpatternpoint.repositories.PatternRepository;
+import nl.bo.bacpatternpoint.repositories.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -14,13 +18,22 @@ import java.util.Optional;
 @Service
 public class PatternService {
     private final PatternRepository patternRepository;
+    private final UserRepository userRepository;
 
-    public PatternService(PatternRepository patternRepository) {
+    public PatternService(PatternRepository patternRepository, UserRepository userRepository) {
         this.patternRepository = patternRepository;
+        this.userRepository = userRepository;
     }
 
     public PatternResponseDto createPattern(PatternCreateDto patternCreateDto){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+
+        User user = userRepository.findByUsername(currentUsername)
+                .orElseThrow(() -> new RuntimeException("User niet gevonden met username " + currentUsername));
+
         Pattern pattern = PatternMapper.toEntity(patternCreateDto);
+        pattern.setUser(user);
         Pattern savedPattern = patternRepository.save(pattern);
         return PatternMapper.toResponseDto(savedPattern);
     }

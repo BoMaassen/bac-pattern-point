@@ -17,6 +17,7 @@ public class PostMapper {
         dto.setDescription(post.getDescription());
         dto.setLikes(post.getLikes());
         dto.setDraft(post.isDraft());
+        dto.setUsername(post.getUser().getUsername());
         if (post.getImage() != null) {
             dto.setImage(ImageMapper.toResponseDto(post.getImage()));
         }

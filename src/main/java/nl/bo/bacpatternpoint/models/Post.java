@@ -1,9 +1,10 @@
 package nl.bo.bacpatternpoint.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -23,16 +24,26 @@ public class Post {
     private boolean isDraft;
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
-    public Post() {
+    public User getUser() {
+        return user;
     }
 
-    public Post(String title, String category, String description, int likes, boolean isDraft) {
-        this.title = title;
-        this.category = category;
-        this.description = description;
-        this.likes = likes;
-        this.isDraft = isDraft;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Image getImage() {

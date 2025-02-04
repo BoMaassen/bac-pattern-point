@@ -8,6 +8,15 @@ public class PostResponseDto {
     private int likes;
     private boolean isDraft;
     private ImageResponseDto image;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public ImageResponseDto getImage() {
         return image;

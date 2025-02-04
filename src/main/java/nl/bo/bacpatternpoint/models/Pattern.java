@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 @Entity
@@ -34,12 +35,42 @@ public class Pattern {
     private double length;
     @Positive(message = "Breedte moet groter dan 0cm zijn")
     private double width;
+    private boolean isDraft;
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Step> steps;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Abbreviation> abbreviations;
+    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    public boolean isDraft() {
+        return isDraft;
+    }
+
+    public void setDraft(boolean draft) {
+        isDraft = draft;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public List<Abbreviation> getAbbreviations() {
         return abbreviations;
