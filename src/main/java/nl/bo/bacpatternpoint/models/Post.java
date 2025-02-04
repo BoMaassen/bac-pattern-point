@@ -26,9 +26,19 @@ public class Post {
     private Image image;
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments;
+    @OneToMany(mappedBy = "post")
+    private List<Pattern> patterns;
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    public List<Pattern> getPatterns() {
+        return patterns;
+    }
+
+    public void setPatterns(List<Pattern> patterns) {
+        this.patterns = patterns;
+    }
 
     public User getUser() {
         return user;
