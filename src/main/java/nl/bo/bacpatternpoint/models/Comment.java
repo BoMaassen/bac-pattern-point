@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class Comment {
     @Size(min = 1, max = 150, message = "Reactie moet tussen 1 en 150 karakters zijn")
     private String message;
     @CreationTimestamp
-    private LocalDate timeStamp;
+    private LocalDateTime timeStamp;
     private int likes;
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
@@ -91,11 +92,11 @@ public class Comment {
         this.id = id;
     }
 
-    public LocalDate getTimeStamp() {
+    public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(LocalDate timeStamp) {
+    public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
     }
 

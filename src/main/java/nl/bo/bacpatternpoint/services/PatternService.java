@@ -72,6 +72,7 @@ public class PatternService {
         return PatternMapper.toResponseDto(pattern);
     }
 
+    @Transactional
     public List<PatternResponseDto> getPatternsForPost(Long postId){
         Optional<Post> optionalPost = postRepository.findById(postId);
         if(optionalPost.isEmpty()){
