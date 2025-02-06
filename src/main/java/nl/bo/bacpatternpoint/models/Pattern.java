@@ -23,6 +23,7 @@ public class Pattern {
     @NotNull(message = "Beschrijving is verplicht")
     @Size(min = 5, max = 300, message = "Beschrijving moet tussen 5 en 300 karakters zijn")
     private String description;
+    private int likes;
     @Positive(message = "Haaknaald moet groter dan 0mm zijn")
     private double hookSize;
     @Min(value = 1, message = "Aantal gram wol moet minimaal 1 zijn")
@@ -50,11 +51,9 @@ public class Pattern {
     @ManyToOne
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
-
     public Pattern() {
 
     }
-
     public Pattern(String title, String level, String description, double hookSize, int amountOfYarn, String typeYarn, boolean scissor, boolean darningNeedle, boolean measuringTape, double length, double width, boolean isDraft, Image image, List<Step> steps, List<Abbreviation> abbreviations, List<Comment> comments, User user) {
         this.title = title;
         this.level = level;
@@ -74,8 +73,9 @@ public class Pattern {
         this.comments = comments;
         this.user = user;
     }
+
     public Pattern(Long id, String title, String level, String description, double hookSize, int amountOfYarn, String typeYarn, boolean scissor, boolean darningNeedle, boolean measuringTape, double length, double width, boolean isDraft) {
-       this.id = id;
+        this.id = id;
         this.title = title;
         this.level = level;
         this.description = description;
@@ -88,6 +88,14 @@ public class Pattern {
         this.length = length;
         this.width = width;
         this.isDraft = isDraft;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     public Post getPost() {

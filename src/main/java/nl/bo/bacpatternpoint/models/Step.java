@@ -34,6 +34,12 @@ public class Step {
         this.description = description;
     }
 
+    public Step(String title, String description, Pattern pattern) {
+        this.title = title;
+        this.description = description;
+        this.pattern = pattern;
+    }
+
     public Pattern getPattern() {
         return pattern;
     }

@@ -32,6 +32,7 @@ public class Post {
     @OneToMany(mappedBy = "post")
     private List<Pattern> patterns;
 
+
     public List<Pattern> getPatterns() {
         return patterns;
     }

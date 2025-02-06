@@ -27,6 +27,17 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Pattern> patterns;
 
+    public User() {
+    }
+
+    public User(String username, String password, String role, String email, String biography) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+        this.biography = biography;
+    }
+
     public List<Pattern> getPatterns() {
         return patterns;
     }
