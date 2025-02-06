@@ -38,12 +38,12 @@ public class StepService {
 
         Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RecordNotFoundException("Geen Patroon gevonden met id " + patternId));
 
-        Step updatedStep = StepMapper.toEntity(stepUpdateDto);
 
-        updatedStep.setId(step.getId());
-        updatedStep.setPattern(pattern);
+        step.setTitle(stepUpdateDto.getTitle());
+        step.setDescription(stepUpdateDto.getDescription());
+        step.setPattern(pattern);
 
-        Step savedStep = stepRepository.save(updatedStep);
+        Step savedStep = stepRepository.save(step);
 
         return StepMapper.toResponseDto(savedStep);
 

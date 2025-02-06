@@ -11,9 +11,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "patterns")
-public class Pattern extends Content{
+public class Pattern {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotNull(message = "Titel is verplicht")
+    @Size(min = 5, max = 50, message = "Titel moet tussen 5 en 50 karakters zijn")
+    private String title;
     @NotNull(message = "Niveau is verplicht")
     private String level;
+    @NotNull(message = "Beschrijving is verplicht")
+    @Size(min = 5, max = 300, message = "Beschrijving moet tussen 5 en 300 karakters zijn")
+    private String description;
     @Positive(message = "Haaknaald moet groter dan 0mm zijn")
     private double hookSize;
     @Min(value = 1, message = "Aantal gram wol moet minimaal 1 zijn")
@@ -26,6 +35,7 @@ public class Pattern extends Content{
     private double length;
     @Positive(message = "Breedte moet groter dan 0cm zijn")
     private double width;
+    private boolean isDraft;
     @OneToOne(cascade = CascadeType.ALL)
     private Image image;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -41,12 +51,59 @@ public class Pattern extends Content{
     @JoinColumn(name = "post_id", referencedColumnName = "id")
     private Post post;
 
+    public Pattern() {
+
+    }
+
+    public Pattern(String title, String level, String description, double hookSize, int amountOfYarn, String typeYarn, boolean scissor, boolean darningNeedle, boolean measuringTape, double length, double width, boolean isDraft, Image image, List<Step> steps, List<Abbreviation> abbreviations, List<Comment> comments, User user) {
+        this.title = title;
+        this.level = level;
+        this.description = description;
+        this.hookSize = hookSize;
+        this.amountOfYarn = amountOfYarn;
+        this.typeYarn = typeYarn;
+        this.scissor = scissor;
+        this.darningNeedle = darningNeedle;
+        this.measuringTape = measuringTape;
+        this.length = length;
+        this.width = width;
+        this.isDraft = isDraft;
+        this.image = image;
+        this.steps = steps;
+        this.abbreviations = abbreviations;
+        this.comments = comments;
+        this.user = user;
+    }
+    public Pattern(Long id, String title, String level, String description, double hookSize, int amountOfYarn, String typeYarn, boolean scissor, boolean darningNeedle, boolean measuringTape, double length, double width, boolean isDraft) {
+       this.id = id;
+        this.title = title;
+        this.level = level;
+        this.description = description;
+        this.hookSize = hookSize;
+        this.amountOfYarn = amountOfYarn;
+        this.typeYarn = typeYarn;
+        this.scissor = scissor;
+        this.darningNeedle = darningNeedle;
+        this.measuringTape = measuringTape;
+        this.length = length;
+        this.width = width;
+        this.isDraft = isDraft;
+    }
+
     public Post getPost() {
         return post;
     }
 
     public void setPost(Post post) {
         this.post = post;
+    }
+
+    public boolean isDraft() {
+        return isDraft;
+    }
+
+    public void setDraft(boolean draft) {
+        isDraft = draft;
     }
 
     public User getUser() {
@@ -153,6 +210,14 @@ public class Pattern extends Content{
         this.hookSize = hookSize;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getLevel() {
         return level;
     }
@@ -160,6 +225,20 @@ public class Pattern extends Content{
     public void setLevel(String level) {
         this.level = level;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
-
-
