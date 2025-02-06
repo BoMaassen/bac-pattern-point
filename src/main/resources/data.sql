@@ -28,6 +28,16 @@ VALUES ('image/png', 'Trui Afbeelding', 'https://i.pinimg.com/736x/27/cf/00/27cf
        ('image/png', 'Trui Afbeelding', 'https://i.pinimg.com/736x/27/cf/00/27cf009a7f55d6f16f84f904fd3b5044.jpg'),
        ('image/jpeg', 'Sjaal Afbeelding', 'https://i.pinimg.com/736x/38/25/ae/3825aedf193bbb6848f16cdc495d183e.jpg'),
        ('image/jpeg', 'Muts Afbeelding', 'https://i.pinimg.com/736x/5f/a0/cd/5fa0cd97eb2ffa10fca8203754867ee2.jpg'),
+       ('image/png', 'Tas Afbeelding', 'https://i.pinimg.com/736x/47/74/4d/47744d89aff17323cf1c16ce74efd490.jpg'),
+       ('image/jpeg', 'Muts Afbeelding', 'https://i.pinimg.com/736x/5f/a0/cd/5fa0cd97eb2ffa10fca8203754867ee2.jpg'),
+       ('image/png', 'Tas Afbeelding', 'https://i.pinimg.com/736x/47/74/4d/47744d89aff17323cf1c16ce74efd490.jpg'),
+       ('image/png', 'Trui Afbeelding', 'https://i.pinimg.com/736x/27/cf/00/27cf009a7f55d6f16f84f904fd3b5044.jpg'),
+       ('image/jpeg', 'Sjaal Afbeelding', 'https://i.pinimg.com/736x/38/25/ae/3825aedf193bbb6848f16cdc495d183e.jpg'),
+       ('image/jpeg', 'Muts Afbeelding', 'https://i.pinimg.com/736x/5f/a0/cd/5fa0cd97eb2ffa10fca8203754867ee2.jpg'),
+       ('image/png', 'Tas Afbeelding', 'https://i.pinimg.com/736x/47/74/4d/47744d89aff17323cf1c16ce74efd490.jpg'),
+       ('image/png', 'Trui Afbeelding', 'https://i.pinimg.com/736x/27/cf/00/27cf009a7f55d6f16f84f904fd3b5044.jpg'),
+       ('image/jpeg', 'Sjaal Afbeelding', 'https://i.pinimg.com/736x/38/25/ae/3825aedf193bbb6848f16cdc495d183e.jpg'),
+       ('image/jpeg', 'Muts Afbeelding', 'https://i.pinimg.com/736x/5f/a0/cd/5fa0cd97eb2ffa10fca8203754867ee2.jpg'),
        ('image/png', 'Tas Afbeelding', 'https://i.pinimg.com/736x/47/74/4d/47744d89aff17323cf1c16ce74efd490.jpg');
 
 -- Voeg posts toe

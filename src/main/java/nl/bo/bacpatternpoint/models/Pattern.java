@@ -38,6 +38,7 @@ public class Pattern {
     private double width;
     private boolean isDraft;
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Image image;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Step> steps;
