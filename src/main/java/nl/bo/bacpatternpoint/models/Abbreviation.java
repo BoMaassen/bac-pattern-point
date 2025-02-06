@@ -14,6 +14,14 @@ public class Abbreviation {
     @JoinColumn(name = "pattern_id", referencedColumnName = "id")
     private Pattern pattern;
 
+    public Abbreviation(String abbreviated, String fullForm) {
+        this.abbreviated = abbreviated;
+        this.fullForm = fullForm;
+    }
+
+    public Abbreviation() {
+    }
+
     public String getFullForm() {
         return fullForm;
     }

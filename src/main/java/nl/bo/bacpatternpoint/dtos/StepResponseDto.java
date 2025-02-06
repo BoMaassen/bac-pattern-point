@@ -12,9 +12,13 @@ public class StepResponseDto {
     @Size(min = 5, max = 300, message = "Beschrijving moet tussen 5 en 300 karakters zijn")
     private String description;
 
+    public StepResponseDto(Long id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
 
-    public StepResponseDto(){}
-    public StepResponseDto(long id, String title, String description) {
+    public StepResponseDto() {
     }
 
     public StepResponseDto(String title, String description) {

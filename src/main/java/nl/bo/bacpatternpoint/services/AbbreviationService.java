@@ -39,12 +39,11 @@ public class AbbreviationService {
 
         Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RecordNotFoundException("Geen Patroon gevonden met id " + patternId));
 
-        Abbreviation updatedAbbreviation = AbbreviationMapper.toEntity(abbreviationUpdateDto);
+        abbreviation.setAbbreviated(abbreviationUpdateDto.getAbbreviated());
+        abbreviation.setFullForm(abbreviationUpdateDto.getFullForm());
+        abbreviation.setPattern(pattern);
 
-        updatedAbbreviation.setId(abbreviation.getId());
-        updatedAbbreviation.setPattern(pattern);
-
-        Abbreviation savedAbbreviation = abbreviationRepository.save(updatedAbbreviation);
+        Abbreviation savedAbbreviation = abbreviationRepository.save(abbreviation);
 
         return AbbreviationMapper.toResponseDto(savedAbbreviation);
 

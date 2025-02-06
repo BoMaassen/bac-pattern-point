@@ -4,6 +4,13 @@ public class AbbreviationUpdateDto {
     private String abbreviated;
     private String fullForm;
 
+    public AbbreviationUpdateDto() {
+    }
+    public AbbreviationUpdateDto(String abbreviated, String fullForm) {
+        this.abbreviated = abbreviated;
+        this.fullForm = fullForm;
+    }
+
     public String getFullForm() {
         return fullForm;
     }

@@ -24,9 +24,14 @@ public class Step {
     }
 
     public Step(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
-    public Step(long id, String title, String description) {
+    public Step(Long id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
     }
 
     public Pattern getPattern() {

@@ -11,7 +11,12 @@ public class StepCreateDto {
     @Size(min = 5, max = 300, message = "Beschrijving moet tussen 5 en 300 karakters zijn")
     private String description;
 
+    public StepCreateDto() {
+    }
+
     public StepCreateDto(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     public String getDescription() {
