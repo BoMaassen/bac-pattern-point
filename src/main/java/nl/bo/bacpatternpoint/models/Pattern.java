@@ -40,9 +40,9 @@ public class Pattern {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "image_id", referencedColumnName = "id")
     private Image image;
-    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
     private List<Step> steps;
-    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
     private List<Abbreviation> abbreviations;
     @OneToMany(mappedBy = "pattern", cascade = CascadeType.ALL)
     private List<Comment> comments;

@@ -7,6 +7,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -40,7 +41,15 @@ public class LoginController {
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                     .body("Token generated");
         } catch (AuthenticationException ex) {
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+            String errorMessage = "Inlogpoging mislukt. Controleer je gebruikersnaam of wachtwoord.";
+
+            // Je kunt ook specifiek naar de exception kijken om te zien of het door een verkeerd wachtwoord komt
+            if (ex instanceof BadCredentialsException) {
+                errorMessage = "Fout wachtwoord. Probeer het opnieuw.";
+            }
+
+            // Stuur de foutmelding terug naar de client
+            return new ResponseEntity<>(errorMessage, HttpStatus.UNAUTHORIZED);
         }
     }
 }
