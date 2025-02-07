@@ -43,7 +43,7 @@ public class PatternController {
     }
 
     @PostMapping("/{patternId}/comments")
-    public ResponseEntity<CommentResponseDto> createCommentByPattern(@PathVariable Long patternId, @RequestBody CommentCreateDto commentCreateDto){
+    public ResponseEntity<CommentResponseDto> createCommentByPattern(@Valid @PathVariable Long patternId, @RequestBody CommentCreateDto commentCreateDto){
         CommentResponseDto commentResponseDto = commentService.createCommentByPattern(patternId, commentCreateDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(commentResponseDto.getId()).toUri();
         return ResponseEntity.created(location).body(commentResponseDto);

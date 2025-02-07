@@ -44,7 +44,6 @@ public class UserService {
         return UserMapper.toResponseDto(savedUser);
         } else throw new UnauthorizedActionException("niet toegestaan om een andere gebruiker te wijzigen");
 
-
     }
 
     public UserResponseDto getUserByUsername(String username){

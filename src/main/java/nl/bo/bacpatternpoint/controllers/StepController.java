@@ -1,5 +1,6 @@
 package nl.bo.bacpatternpoint.controllers;
 
+import jakarta.validation.Valid;
 import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.services.StepService;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +21,14 @@ public class StepController {
     }
 
     @PostMapping
-    public ResponseEntity<List<StepResponseDto>> createSteps(@PathVariable Long patternId, @RequestBody List<StepCreateDto> stepCreateDtos) {
+    public ResponseEntity<List<StepResponseDto>> createSteps(@Valid @PathVariable Long patternId, @RequestBody List<StepCreateDto> stepCreateDtos) {
         List<StepResponseDto> stepResponseDtos = stepService.createSteps(patternId, stepCreateDtos);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(stepResponseDtos.get(0).getId()).toUri();
         return ResponseEntity.created(location).body(stepResponseDtos);
     }
 
     @PutMapping("/{stepId}")
-    public ResponseEntity<StepResponseDto> updateStep(@PathVariable Long patternId, @PathVariable Long stepId, @RequestBody StepUpdateDto stepUpdateDto) {
+    public ResponseEntity<StepResponseDto> updateStep(@Valid @PathVariable Long patternId, @PathVariable Long stepId, @RequestBody StepUpdateDto stepUpdateDto) {
         StepResponseDto stepResponseDto = stepService.updateStep(patternId, stepId, stepUpdateDto);
         return ResponseEntity.ok(stepResponseDto);
     }
