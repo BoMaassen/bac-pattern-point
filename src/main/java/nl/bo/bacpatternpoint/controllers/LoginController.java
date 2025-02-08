@@ -43,12 +43,10 @@ public class LoginController {
         } catch (AuthenticationException ex) {
             String errorMessage = "Inlogpoging mislukt. Controleer je gebruikersnaam of wachtwoord.";
 
-            // Je kunt ook specifiek naar de exception kijken om te zien of het door een verkeerd wachtwoord komt
             if (ex instanceof BadCredentialsException) {
-                errorMessage = "Fout wachtwoord. Probeer het opnieuw.";
+                errorMessage = "Fout wachtwoord of gebruikersnaam. Probeer het opnieuw.";
             }
 
-            // Stuur de foutmelding terug naar de client
             return new ResponseEntity<>(errorMessage, HttpStatus.UNAUTHORIZED);
         }
     }
