@@ -44,7 +44,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/posts/{postId}/patterns").hasAnyRole("HAKER", "PATROONMAKER")
                         .requestMatchers(HttpMethod.POST, "/posts/{postId}/patterns").hasRole("PATROONMAKER")
 
-                        /*.requestMatchers(HttpMethod.GET, "/posts/{id}/image").hasAnyRole("HAKER", "PATROONMAKER")*/
                         .requestMatchers(HttpMethod.GET, "/posts/{id}/image").permitAll()
                         .requestMatchers(HttpMethod.POST, "/posts/{id}/image").hasRole("HAKER")
 
@@ -54,7 +53,6 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.GET, "/posts").hasAnyRole("HAKER", "PATROONMAKER")
                         .requestMatchers(HttpMethod.POST, "/posts").hasRole("HAKER")
-
 
                         .requestMatchers(HttpMethod.PUT, "/patterns/{patternId}/abbreviations/{abbreviationId}").hasRole("PATROONMAKER")
                         .requestMatchers(HttpMethod.GET, "/patterns/{patternId}/abbreviations").hasAnyRole("HAKER", "PATROONMAKER")
@@ -67,7 +65,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/patterns/{patternId}/steps").hasAnyRole("HAKER", "PATROONMAKER")
                         .requestMatchers(HttpMethod.POST, "/patterns/{patternId}/steps").hasRole("PATROONMAKER")
 
-
                         .requestMatchers(HttpMethod.GET, "/patterns/{id}/image").permitAll()
                         .requestMatchers(HttpMethod.POST, "/patterns/{id}/image").hasRole("PATROONMAKER")
                         .requestMatchers(HttpMethod.GET, "/patterns/{id}").hasAnyRole("HAKER", "PATROONMAKER")
@@ -75,9 +72,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/patterns/{id}").hasRole("PATROONMAKER")
 
                         .requestMatchers( "/comments/**").hasAnyRole("HAKER", "PATROONMAKER")
-
-
-
 
                         .anyRequest().denyAll()
                 )

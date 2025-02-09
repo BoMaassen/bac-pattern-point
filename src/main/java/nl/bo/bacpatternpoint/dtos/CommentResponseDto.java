@@ -1,6 +1,5 @@
 package nl.bo.bacpatternpoint.dtos;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class CommentResponseDto {

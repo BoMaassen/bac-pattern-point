@@ -3,7 +3,6 @@ package nl.bo.bacpatternpoint.controllers;
 import jakarta.validation.Valid;
 import nl.bo.bacpatternpoint.dtos.*;
 import nl.bo.bacpatternpoint.mappers.PostMapper;
-import nl.bo.bacpatternpoint.models.Comment;
 import nl.bo.bacpatternpoint.models.Image;
 import nl.bo.bacpatternpoint.models.Post;
 import nl.bo.bacpatternpoint.services.CommentService;
@@ -17,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;

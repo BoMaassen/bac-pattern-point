@@ -38,11 +38,7 @@ Pas in de application.properties het wachtwoord aan naar je eigen wachtwoord om 
 
 ### 6. Start de backend applicatie:
 
-Voer de volgende commando uit om de Spring Boot applicatie te bouwen en te starten:
-
-`mvn spring-boot:run`
-
-Of klikt rechtsboven naast “BacPatternPoint” op het groene driehoekje De backend applicatie zou nu draaien op http://localhost:8080.
+Om de applicatie te starten klik je rechtsboven naast “BacPatternPoint” op het groene driehoekje. De backend applicatie zou nu moeten draaien op http://localhost:8080.
 
 ## Frontend (React met Vite en Node.js):
 

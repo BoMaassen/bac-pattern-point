@@ -29,7 +29,6 @@ public class StepService {
         }
         List<Step> savedSteps = stepRepository.saveAll(steps);
 
-
         return StepMapper.toResponseDtoList(savedSteps);
     }
 

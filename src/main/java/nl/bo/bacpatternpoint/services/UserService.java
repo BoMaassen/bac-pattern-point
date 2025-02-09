@@ -4,7 +4,6 @@ import nl.bo.bacpatternpoint.config.PasswordEncoderUtil;
 import nl.bo.bacpatternpoint.dtos.UserCreateDto;
 import nl.bo.bacpatternpoint.dtos.UserResponseDto;
 import nl.bo.bacpatternpoint.dtos.UserUpdateDto;
-import nl.bo.bacpatternpoint.exception.RecordNotFoundException;
 import nl.bo.bacpatternpoint.exception.UnauthorizedActionException;
 import nl.bo.bacpatternpoint.mappers.UserMapper;
 import nl.bo.bacpatternpoint.models.User;
@@ -42,7 +41,8 @@ public class UserService {
         User savedUser = userRepository.save(updatedUser);
 
         return UserMapper.toResponseDto(savedUser);
-        } else throw new UnauthorizedActionException("niet toegestaan om een andere gebruiker te wijzigen");
+        }
+        else throw new UnauthorizedActionException("niet toegestaan om een andere gebruiker te wijzigen");
 
     }
 

@@ -1,7 +1,6 @@
 package nl.bo.bacpatternpoint.models;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity

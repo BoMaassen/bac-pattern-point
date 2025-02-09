@@ -77,7 +77,6 @@ public class PatternController {
     public ResponseEntity<PatternResponseDto> updatePattern(@Valid @PathVariable Long id, @RequestBody PatternUpdateDto patternUpdateDto) {
         PatternResponseDto patternResponseDto = patternService.updatePattern(id, patternUpdateDto);
         return ResponseEntity.ok(patternResponseDto);
-
     }
 
     @DeleteMapping("/{id}")

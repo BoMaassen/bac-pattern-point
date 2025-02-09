@@ -30,7 +30,6 @@ public class AbbreviationService {
         }
         List<Abbreviation> savedAbbreviations = abbreviationRepository.saveAll(abbreviations);
 
-
         return AbbreviationMapper.toResponseDtoList(savedAbbreviations);
     }
 
@@ -46,7 +45,6 @@ public class AbbreviationService {
         Abbreviation savedAbbreviation = abbreviationRepository.save(abbreviation);
 
         return AbbreviationMapper.toResponseDto(savedAbbreviation);
-
     }
 
     public List<AbbreviationResponseDto> getAbbreviations (Long patternId){
@@ -55,7 +53,5 @@ public class AbbreviationService {
         List<Abbreviation> abbreviations = pattern.getAbbreviations();
 
         return AbbreviationMapper.toResponseDtoList(abbreviations);
-
     }
-
 }

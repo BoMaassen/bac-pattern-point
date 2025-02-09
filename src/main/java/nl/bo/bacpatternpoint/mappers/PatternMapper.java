@@ -31,7 +31,6 @@ public class PatternMapper {
         if (pattern.getSteps() != null) {
             dto.setSteps(StepMapper.toResponseDtoList(pattern.getSteps()));
         }
-
         return dto;
     }
 

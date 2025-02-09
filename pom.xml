@@ -6,11 +6,11 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>nl.bo</groupId>
     <artifactId>BacPatternPoint</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>BacPatternPoint</name>
     <description>BacPatternPoint</description>
     <url/>
@@ -112,5 +112,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

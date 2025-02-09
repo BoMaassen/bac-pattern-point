@@ -1,6 +1,5 @@
 package nl.bo.bacpatternpoint.controllers;
 
-import jakarta.validation.Valid;
 import nl.bo.bacpatternpoint.dtos.UserLoginRequestDTO;
 import nl.bo.bacpatternpoint.security.JwtService;
 import org.springframework.http.HttpHeaders;

@@ -25,7 +25,6 @@ public class Image {
         this.contentType = contentType;
     }
 
-
     public Image(String title, String url, String contentType, byte[] contents) {
         this.title = title;
         this.url = url;

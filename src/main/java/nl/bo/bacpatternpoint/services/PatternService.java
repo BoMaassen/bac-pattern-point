@@ -80,7 +80,6 @@ public class PatternService {
         }
 
         List<Pattern> patterns = optionalPost.get().getPatterns();
-
         return PatternMapper.toResponseDtoList(patterns);
     }
 
@@ -96,7 +95,6 @@ public class PatternService {
         if(optionalPattern.isEmpty()){
             throw new RecordNotFoundException("Patroon met nummer " + patternId + " niet gevonden.");
         }
-
         return optionalPattern.get().getImage();
     }
 
@@ -110,5 +108,4 @@ public class PatternService {
         pattern.setImage(image);
         return patternRepository.save(pattern);
     }
-
 }

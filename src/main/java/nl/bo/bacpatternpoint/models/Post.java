@@ -3,7 +3,6 @@ package nl.bo.bacpatternpoint.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-
 import java.util.List;
 
 @Entity
@@ -32,7 +31,6 @@ public class Post {
     private User user;
     @OneToMany(mappedBy = "post")
     private List<Pattern> patterns;
-
 
     public List<Pattern> getPatterns() {
         return patterns;
