@@ -33,19 +33,45 @@ public class SecurityConfig {
 
                         .requestMatchers("/api-docs/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
-                        .requestMatchers("/**").permitAll()
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers(HttpMethod.GET ,"/users/{username}").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.PUT ,"/users/{username}").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.DELETE ,"/users/{username}").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers("/users").permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/users/{id}").hasAnyRole("HAKER", "PATROONMAKER")
-                        .requestMatchers(HttpMethod.PUT, "/users/{id}").hasAnyRole("HAKER", "PATROONMAKER")
-                        .requestMatchers(HttpMethod.DELETE, "/users/{id}").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.GET, "/posts/{postId}/comments").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.POST, "/posts/{postId}/comments").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.GET, "/posts/{postId}/patterns").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.POST, "/posts/{postId}/patterns").hasRole("PATROONMAKER")
 
-                        .requestMatchers(HttpMethod.GET, "/posts/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/posts").hasRole("HAKER")
+                        .requestMatchers(HttpMethod.GET, "/posts/{id}/image").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/posts/{id}/image").hasRole("HAKER")
+
                         .requestMatchers(HttpMethod.GET, "/posts/{id}").hasAnyRole("HAKER", "PATROONMAKER")
                         .requestMatchers(HttpMethod.PUT, "/posts/{id}").hasRole("HAKER")
                         .requestMatchers(HttpMethod.DELETE, "/posts/{id}").hasRole("HAKER")
+
+                        .requestMatchers(HttpMethod.GET, "/posts").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.POST, "/posts").hasRole("HAKER")
+
+                        .requestMatchers(HttpMethod.PUT, "/patterns/{patternId}/abbreviations/{abbreviationId}").hasRole("PATROONMAKER")
+                        .requestMatchers(HttpMethod.GET, "/patterns/{patternId}/abbreviations").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.POST, "/patterns/{patternId}/abbreviations").hasRole("PATROONMAKER")
+
+                        .requestMatchers(HttpMethod.GET, "/patterns/{patternId}/comments").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.POST, "/patterns/{patternId}/comments").hasAnyRole("HAKER", "PATROONMAKER")
+
+                        .requestMatchers(HttpMethod.PUT, "/patterns/{patternId}/steps/{stepId}").hasRole("PATROONMAKER")
+                        .requestMatchers(HttpMethod.GET, "/patterns/{patternId}/steps").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.POST, "/patterns/{patternId}/steps").hasRole("PATROONMAKER")
+
+                        .requestMatchers(HttpMethod.GET, "/patterns/{id}/image").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/patterns/{id}/image").hasRole("PATROONMAKER")
+                        .requestMatchers(HttpMethod.GET, "/patterns/{id}").hasAnyRole("HAKER", "PATROONMAKER")
+                        .requestMatchers(HttpMethod.PUT, "/patterns/{id}").hasRole("PATROONMAKER")
+                        .requestMatchers(HttpMethod.DELETE, "/patterns/{id}").hasRole("PATROONMAKER")
+
+                        .requestMatchers( "/comments/**").hasAnyRole("HAKER", "PATROONMAKER")
 
                         .anyRequest().denyAll()
                 )

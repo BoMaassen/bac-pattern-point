@@ -4,10 +4,12 @@ import nl.bo.bacpatternpoint.config.PasswordEncoderUtil;
 import nl.bo.bacpatternpoint.dtos.UserCreateDto;
 import nl.bo.bacpatternpoint.dtos.UserResponseDto;
 import nl.bo.bacpatternpoint.dtos.UserUpdateDto;
+import nl.bo.bacpatternpoint.exception.UnauthorizedActionException;
 import nl.bo.bacpatternpoint.mappers.UserMapper;
 import nl.bo.bacpatternpoint.models.User;
 import nl.bo.bacpatternpoint.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,7 +29,7 @@ public class UserService {
     }
 
     public UserResponseDto updateUser(String username, UserUpdateDto userUpdateDto){
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Geen gebruiker gevonden met gebruikersnaam " + username));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Geen gebruiker gevonden met gebruikersnaam " + username));
 
         var principal = SecurityContextHolder.getContext().getAuthentication();
         if (principal.getName().equals(user.getUsername())){
@@ -39,23 +41,23 @@ public class UserService {
         User savedUser = userRepository.save(updatedUser);
 
         return UserMapper.toResponseDto(savedUser);
-        } else throw new RuntimeException("niet toegestaan om een andere gebruiker te wijzigen");
-
+        }
+        else throw new UnauthorizedActionException("niet toegestaan om een andere gebruiker te wijzigen");
 
     }
 
     public UserResponseDto getUserByUsername(String username){
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("Geen gebruiker gevonden"));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Geen gebruiker gevonden"));
         var principal = SecurityContextHolder.getContext().getAuthentication();
 
         if (principal.getName().equals(user.getUsername())){
             return UserMapper.toResponseDto(user);
         }
-        else throw new RuntimeException("niet toegestaan om een andere gebruiker op te vragen");
+        else throw new UnauthorizedActionException("niet toegestaan om een andere gebruiker op te vragen");
     }
 
     public boolean deleteUser(String username){
-        User user = userRepository.findByUsername(username).orElseThrow(()-> new RuntimeException("Geen gebruiker gevonden met gebruikersnaam " + username));
+        User user = userRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("Geen gebruiker gevonden met gebruikersnaam " + username));
         var principal = SecurityContextHolder.getContext().getAuthentication();
 
         if (principal.getName().equals(user.getUsername())){
@@ -63,6 +65,6 @@ public class UserService {
 
             return true;
         }
-       else throw new RuntimeException("niet toegestaan om een andere gebruiker te verwijderen");
+       else throw new UnauthorizedActionException("niet toegestaan om een andere gebruiker te verwijderen");
     }
 }

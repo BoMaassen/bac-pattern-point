@@ -4,7 +4,6 @@ import nl.bo.bacpatternpoint.dtos.CommentCreateDto;
 import nl.bo.bacpatternpoint.dtos.CommentResponseDto;
 import nl.bo.bacpatternpoint.dtos.CommentUpdateDto;
 import nl.bo.bacpatternpoint.models.Comment;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

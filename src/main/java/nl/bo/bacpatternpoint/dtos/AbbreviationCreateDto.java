@@ -4,6 +4,12 @@ public class AbbreviationCreateDto {
     private String abbreviated;
     private String fullForm;
 
+    public AbbreviationCreateDto() {
+    }
+    public AbbreviationCreateDto(String abbreviated, String fullForm) {
+        this.abbreviated = abbreviated;
+        this.fullForm = fullForm;
+    }
     public String getFullForm() {
         return fullForm;
     }

@@ -1,6 +1,7 @@
 package nl.bo.bacpatternpoint.services;
 
 import nl.bo.bacpatternpoint.dtos.*;
+import nl.bo.bacpatternpoint.exception.RecordNotFoundException;
 import nl.bo.bacpatternpoint.mappers.AbbreviationMapper;
 import nl.bo.bacpatternpoint.models.Abbreviation;
 import nl.bo.bacpatternpoint.models.Pattern;
@@ -21,7 +22,7 @@ public class AbbreviationService {
     }
 
     public List<AbbreviationResponseDto> createAbbreviations(Long patternId, List<AbbreviationCreateDto> abbreviationCreateDto){
-       Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RuntimeException("Geen patroon gevonden met id " + patternId));
+       Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RecordNotFoundException("Geen patroon gevonden met id " + patternId));
 
         List<Abbreviation> abbreviations = AbbreviationMapper.toEntityListCreate(abbreviationCreateDto);
         for (Abbreviation abbreviation : abbreviations) {
@@ -29,33 +30,28 @@ public class AbbreviationService {
         }
         List<Abbreviation> savedAbbreviations = abbreviationRepository.saveAll(abbreviations);
 
-
         return AbbreviationMapper.toResponseDtoList(savedAbbreviations);
     }
 
     public AbbreviationResponseDto updateAbbreviation(Long patternId, Long abbreviationId, AbbreviationUpdateDto abbreviationUpdateDto){
-        Abbreviation abbreviation = abbreviationRepository.findById(abbreviationId).orElseThrow(() -> new RuntimeException("Geen afkorting gevonden met id " + abbreviationId));
+        Abbreviation abbreviation = abbreviationRepository.findById(abbreviationId).orElseThrow(() -> new RecordNotFoundException("Geen afkorting gevonden met id " + abbreviationId));
 
-        Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RuntimeException("Geen Patroon gevonden met id " + patternId));
+        Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RecordNotFoundException("Geen Patroon gevonden met id " + patternId));
 
-        Abbreviation updatedAbbreviation = AbbreviationMapper.toEntity(abbreviationUpdateDto);
+        abbreviation.setAbbreviated(abbreviationUpdateDto.getAbbreviated());
+        abbreviation.setFullForm(abbreviationUpdateDto.getFullForm());
+        abbreviation.setPattern(pattern);
 
-        updatedAbbreviation.setId(abbreviation.getId());
-        updatedAbbreviation.setPattern(pattern);
-
-        Abbreviation savedAbbreviation = abbreviationRepository.save(updatedAbbreviation);
+        Abbreviation savedAbbreviation = abbreviationRepository.save(abbreviation);
 
         return AbbreviationMapper.toResponseDto(savedAbbreviation);
-
     }
 
     public List<AbbreviationResponseDto> getAbbreviations (Long patternId){
-        Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RuntimeException("Geen Patroon gevonden met id " + patternId));
+        Pattern pattern = patternRepository.findById(patternId).orElseThrow(() -> new RecordNotFoundException("Geen Patroon gevonden met id " + patternId));
 
         List<Abbreviation> abbreviations = pattern.getAbbreviations();
 
         return AbbreviationMapper.toResponseDtoList(abbreviations);
-
     }
-
 }

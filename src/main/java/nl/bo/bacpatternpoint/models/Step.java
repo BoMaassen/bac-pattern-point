@@ -20,6 +20,26 @@ public class Step {
     @JoinColumn(name = "pattern_id", referencedColumnName = "id", nullable = false)
     private Pattern pattern;
 
+    public Step() {
+    }
+
+    public Step(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public Step(Long id, String title, String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
+    public Step(String title, String description, Pattern pattern) {
+        this.title = title;
+        this.description = description;
+        this.pattern = pattern;
+    }
+
     public Pattern getPattern() {
         return pattern;
     }

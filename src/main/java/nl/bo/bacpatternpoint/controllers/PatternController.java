@@ -34,13 +34,6 @@ public class PatternController {
         this.commentService = commentService;
     }
 
-    @PostMapping
-    public ResponseEntity<PatternResponseDto> createPattern(@Valid @RequestBody PatternCreateDto patternCreateDto) {
-        PatternResponseDto responseDto = patternService.createPattern(patternCreateDto);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(responseDto.getId()).toUri();
-        return ResponseEntity.created(location).body(responseDto);
-    }
-
     @PostMapping("/{id}/image")
     public ResponseEntity<PatternResponseDto> addImgToPattern(@Valid @PathVariable("id") Long patternId, @RequestBody MultipartFile file) throws IOException {
         String url = ServletUriComponentsBuilder.fromCurrentContextPath().path("/patterns/").path(Objects.requireNonNull(patternId.toString())).path("/image").toUriString();
@@ -50,16 +43,10 @@ public class PatternController {
     }
 
     @PostMapping("/{patternId}/comments")
-    public ResponseEntity<CommentResponseDto> createCommentByPattern(@PathVariable Long patternId, @RequestBody CommentCreateDto commentCreateDto){
+    public ResponseEntity<CommentResponseDto> createCommentByPattern(@Valid @PathVariable Long patternId, @RequestBody CommentCreateDto commentCreateDto){
         CommentResponseDto commentResponseDto = commentService.createCommentByPattern(patternId, commentCreateDto);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(commentResponseDto.getId()).toUri();
         return ResponseEntity.created(location).body(commentResponseDto);
-    }
-
-    @GetMapping
-    public ResponseEntity<List<PatternResponseDto>> getPatterns() {
-        List<PatternResponseDto> patternResponseDtos = patternService.getPatterns();
-        return ResponseEntity.ok(patternResponseDtos);
     }
 
     @GetMapping("/{id}/image")
@@ -90,7 +77,6 @@ public class PatternController {
     public ResponseEntity<PatternResponseDto> updatePattern(@Valid @PathVariable Long id, @RequestBody PatternUpdateDto patternUpdateDto) {
         PatternResponseDto patternResponseDto = patternService.updatePattern(id, patternUpdateDto);
         return ResponseEntity.ok(patternResponseDto);
-
     }
 
     @DeleteMapping("/{id}")

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StepMapper {
-    public static StepResponseDto toResponseDto(Step step){
+    public static StepResponseDto toResponseDto(Step step) {
         StepResponseDto dto = new StepResponseDto();
         dto.setId(step.getId());
         dto.setTitle(step.getTitle());

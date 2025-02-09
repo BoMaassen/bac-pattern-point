@@ -16,7 +16,6 @@ public class ImageService {
     }
 
     public Image storeFile(MultipartFile file, String url) throws IOException {
-
         String originalFileName = file.getOriginalFilename();
         String contentType = file.getContentType();
         byte[] bytes = file.getBytes();

@@ -1,11 +1,11 @@
 package nl.bo.bacpatternpoint.dtos;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class CommentResponseDto {
     private Long id;
     private String message;
-    private LocalDate timeStamp;
+    private LocalDateTime timeStamp;
     private int likes;
     private String username;
 
@@ -33,11 +33,11 @@ public class CommentResponseDto {
         this.id = id;
     }
 
-    public LocalDate getTimeStamp() {
+    public LocalDateTime getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(LocalDate timeStamp) {
+    public void setTimeStamp(LocalDateTime timeStamp) {
         this.timeStamp = timeStamp;
     }
 

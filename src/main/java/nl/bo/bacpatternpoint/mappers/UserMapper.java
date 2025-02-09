@@ -42,5 +42,4 @@ public class UserMapper {
     public static List<UserResponseDto> toResponseDtoList(List<User> users){
         return users.stream().map(UserMapper::toResponseDto).collect(Collectors.toList());
     }
-
 }

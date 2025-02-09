@@ -19,6 +19,11 @@ public class Image {
 
     public Image() {
     }
+    public Image(Long id, String title, String url, String contentType) {
+        this.title = title;
+        this.url = url;
+        this.contentType = contentType;
+    }
 
     public Image(String title, String url, String contentType, byte[] contents) {
         this.title = title;
